@@ -4,7 +4,7 @@ env:
   variables:
     ECR_ACCOUNT_ID: "707604458390"
     IMAGE_REPO_NAME: blujaytech
-    CONTAINER_NAME: blujaytech
+    CONTAINER_NAME: website
 
 phases:
   pre_build:
