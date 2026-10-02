@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://www.blujaytech.com/community\role-selection.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Role - Community Portal | Blujay Tech</title>
+    <script src="toast-notifications.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #f8f9fa; }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .max-w-2xl {
+                padding: 1.5rem !important;
+            }
+            
+            h1 {
+                font-size: 1.5rem !important;
+            }
+            
+            h2 {
+                font-size: 1.125rem !important;
+            }
+            
+            .text-sm {
+                font-size: 0.875rem !important;
+            }
+            
+            .py-3 {
+                padding-top: 0.875rem !important;
+                padding-bottom: 0.875rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .max-w-2xl {
+                padding: 1rem !important;
+            }
+            
+            h1 {
+                font-size: 1.25rem !important;
+            }
+            
+            h2 {
+                font-size: 1rem !important;
+            }
+            
+            .w-12 {
+                width: 2.5rem !important;
+                height: 2.5rem !important;
+            }
+            
+            .text-xl {
+                font-size: 1rem !important;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../css/responsive-global.css">
+</head>
+<body class="min-h-screen flex items-center justify-center px-4 py-8">
+    
+    <div class="max-w-2xl w-full bg-white border border-gray-200 rounded-lg shadow-sm p-8 lg:p-12">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <a href="../index.html" class="inline-block mb-6">
+                <img fetchpriority="high" height="400" width="600" src="../logo.png" alt="Blujay Tech" class="h-10 mx-auto">
+            </a>
+            <h1 class="text-2xl font-semibold text-gray-900 mb-2">
+                Complete Your Profile
+            </h1>
+            <p class="text-sm text-gray-600">You've selected: <strong id="roleDisplay"></strong></p>
+        </div>
+
+        <!-- Role Confirmation -->
+        <div id="roleCard" class="bg-blue-50 border border-blue-100 rounded-lg p-6 mb-6">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <i id="roleIcon" class="fas text-xl text-blue-600"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-900 mb-1" id="roleTitle"></h2>
+                    <p id="roleDescription" class="text-sm text-gray-600"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message -->
+        <div class="bg-blue-50 border-l-4 border-blue-600 p-4 mb-6 rounded">
+            <div class="flex items-start space-x-3">
+                <i class="fas fa-info-circle text-blue-600 text-sm mt-0.5"></i>
+                <div class="text-sm text-gray-700">
+                    <p class="font-medium mb-1">Next Step: Create Your Profile</p>
+                    <p>Click continue to fill out your detailed profile. Once submitted, our admin will review and verify your information.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="space-y-3">
+            <button id="continueBtn" 
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-md font-medium text-sm transition flex items-center justify-center space-x-2">
+                <span>Continue to Profile Form</span>
+                <i class="fas fa-arrow-right text-xs"></i>
+            </button>
+            
+            <a href="index.html" 
+                class="block w-full text-center border border-gray-300 text-gray-700 py-3 rounded-md font-medium text-sm hover:bg-gray-50 transition">
+                <i class="fas fa-arrow-left text-xs"></i> Go Back
+            </a>
+        </div>
+
+        <!-- User Info -->
+        <div id="userInfo" class="mt-6 pt-6 border-t border-gray-200">
+            <p class="text-xs text-gray-600">Logged in as: <strong id="userEmail"></strong></p>
+        </div>
+    </div>
+
+    <script>
+        // Get role from sessionStorage (set by the index page when user clicks Join button)
+        const requestedProfile = sessionStorage.getItem('requestedProfile');
+        const role = requestedProfile === 'GIVER' ? 'giver' : 'receiver';
+        
+        console.log('ðŸŽ­ Role Selection Page');
+        console.log('   "¢ requestedProfile:', requestedProfile);
+        console.log('   "¢ role:', role);
+        
+        // Role configurations
+        const roleConfig = {
+            receiver: {
+                display: 'Job Support Seeker',
+                icon: 'fa-user-graduate',
+                title: 'Welcome, Job Support Seeker!',
+                description: 'You\'ll be able to connect with recruiters and hiring managers to accelerate your career.',
+                nextPage: 'receiver-profile.html?mode=create'
+            },
+            giver: {
+                display: 'Helper',
+                icon: 'fa-hands-helping',
+                title: 'Welcome, Helper!',
+                description: 'You\'ll help job support seekers by providing opportunities, guidance, and professional connections.',
+                nextPage: 'giver-profile.html?mode=create'
+            }
+        };
+        
+        const config = roleConfig[role];
+        
+        // Update UI
+        document.getElementById('roleDisplay').textContent = config.display;
+        document.getElementById('roleIcon').className = 'fas ' + config.icon + ' text-xl text-blue-600';
+        document.getElementById('roleTitle').textContent = config.title;
+        document.getElementById('roleDescription').textContent = config.description;
+        
+        // Firebase Config - Use correct Blujay Tech config
+        const firebaseConfig = {
+            apiKey: "AIzaSyCiedANEie5u-2XQOjdsUFgdkE7s08gArY",
+            authDomain: "blujay-tech.firebaseapp.com",
+            projectId: "blujay-tech",
+            storageBucket: "blujay-tech.firebasestorage.app",
+            messagingSenderId: "586422050005",
+            appId: "1:586422050005:web:737ba2502d1b283ea6165c",
+            measurementId: "G-1JE665W8D0"
+        };
+        
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        
+        // Check authentication
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                document.getElementById('userEmail').textContent = user.email;
+            } else {
+                // Redirect to login if not authenticated
+                showToast('Please login first to access the community portal', 'warning', 3000);
+                setTimeout(() => {
+                    window.location.href = '../login.html';
+                }, 1500);
+            }
+        });
+        
+        // Continue button
+        document.getElementById('continueBtn').addEventListener('click', () => {
+            window.location.href = config.nextPage;
+        });
+    </script>
+
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.2);text-decoration:none;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses%20in%20Hyderabad"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat with us on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,0.25);text-decoration:none;transition:transform 0.2s ease;"
+   onmouseover="this.style.transform='scale(1.1)'"
+   onmouseout="this.style.transform='scale(1)'">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://www.blujaytech.com/admin\admin-contacts.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Submissions - Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .contact-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        .table-row:hover {
+            background: #f8fafc;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-new {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-today {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-yesterday {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-week {
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+
+        .badge-older {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .stats-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .loading-spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #3b82f6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../css/responsive-global.css">
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-envelope text-2xl text-blue-600"></i>
+                <h1 class="text-xl font-bold text-gray-800">Contact Submissions</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="refreshData()"
+                    class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+                <a href="admin-dashboard.html" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="stats-card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Total Submissions</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-1" id="totalCount">0</p>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-full">
+                        <i class="fas fa-inbox text-blue-600 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Today</p>
+                        <p class="text-3xl font-bold text-green-600 mt-1" id="todayCount">0</p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <i class="fas fa-calendar-day text-green-600 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">This Week</p>
+                        <p class="text-3xl font-bold text-yellow-600 mt-1" id="weekCount">0</p>
+                    </div>
+                    <div class="bg-yellow-100 p-3 rounded-full">
+                        <i class="fas fa-calendar-week text-yellow-600 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">This Month</p>
+                        <p class="text-3xl font-bold text-purple-600 mt-1" id="monthCount">0</p>
+                    </div>
+                    <div class="bg-purple-100 p-3 rounded-full">
+                        <i class="fas fa-calendar-alt text-purple-600 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="flex flex-col items-center justify-center py-12">
+            <div class="loading-spinner"></div>
+            <p class="text-gray-600 mt-4">Loading contacts...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="hidden bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+            <i class="fas fa-exclamation-triangle text-red-500 text-4xl mb-3"></i>
+            <p class="text-red-700 font-semibold">Failed to load contacts</p>
+            <p class="text-red-600 text-sm mt-2" id="errorMessage"></p>
+            <button onclick="refreshData()" class="mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                Try Again
+            </button>
+        </div>
+
+        <!-- Contacts Table -->
+        <div id="contactsTable" class="contact-table hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="table-header">
+                            <th class="px-6 py-4 text-left">#</th>
+                            <th class="px-6 py-4 text-left">Name</th>
+                            <th class="px-6 py-4 text-left">Email</th>
+                            <th class="px-6 py-4 text-left">Mobile</th>
+                            <th class="px-6 py-4 text-left">Service</th>
+                            <th class="px-6 py-4 text-left">Message</th>
+                            <th class="px-6 py-4 text-left">Submitted</th>
+                            <th class="px-6 py-4 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contactsBody">
+                        <!-- Rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden bg-white rounded-lg p-12 text-center">
+            <i class="fas fa-inbox text-gray-300 text-6xl mb-4"></i>
+            <p class="text-gray-600 text-lg font-semibold">No contact submissions yet</p>
+            <p class="text-gray-500 text-sm mt-2">Contact form submissions will appear here</p>
+        </div>
+    </div>
+
+    <!-- API Configuration -->
+    <script src="../js/api-config.js"></script>
+
+    <script>
+        const API_URL = window.API_CONFIG ? window.API_CONFIG.getApiUrl() : 'https://blujay-backend.onrender.com/api';
+        let allContacts = [];
+
+        // Check authentication
+        const token = localStorage.getItem('authToken');
+        const userRole = localStorage.getItem('userRole');
+
+        if (!token || userRole !== 'admin') {
+            alert('Access denied. Admin authentication required.');
+            window.location.href = '../login.html';
+        }
+
+        // Fetch contacts on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchContacts();
+        });
+
+        async function fetchContacts() {
+            try {
+                showLoading();
+
+                const response = await fetch(`${API_URL}/contact`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+
+                if (data.success) {
+                    allContacts = data.contacts || [];
+                    displayContacts(allContacts);
+                    updateStats(allContacts);
+                } else {
+                    throw new Error(data.message || 'Failed to fetch contacts');
+                }
+
+            } catch (error) {
+                console.error('Error fetching contacts:', error);
+                showError(error.message);
+            }
+        }
+
+        function displayContacts(contacts) {
+            const tbody = document.getElementById('contactsBody');
+            const loadingState = document.getElementById('loadingState');
+            const errorState = document.getElementById('errorState');
+            const contactsTable = document.getElementById('contactsTable');
+            const emptyState = document.getElementById('emptyState');
+
+            loadingState.classList.add('hidden');
+            errorState.classList.add('hidden');
+
+            if (contacts.length === 0) {
+                contactsTable.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            contactsTable.classList.remove('hidden');
+
+            tbody.innerHTML = contacts.map((contact, index) => {
+                const timeInfo = getTimeInfo(contact.submittedAt);
+                return `
+                    <tr class="table-row border-b border-gray-100">
+                        <td class="px-6 py-4 text-gray-600">${index + 1}</td>
+                        <td class="px-6 py-4">
+                            <div class="font-semibold text-gray-800">${contact.fullName}</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="mailto:${contact.email}" class="text-blue-600 hover:underline">${contact.email}</a>
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="tel:+91${contact.mobile}" class="text-gray-700">+91 ${contact.mobile}</a>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="text-sm text-gray-700">${formatServiceType(contact.serviceType)}</span>
+                        </td>
+                        <td class="px-6 py-4 max-w-xs">
+                            <div class="text-sm text-gray-600 truncate" title="${contact.message || 'No message'}">
+                                ${contact.message || 'No message'}
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex flex-col gap-1">
+                                <span class="badge ${timeInfo.badgeClass}">${timeInfo.label}</span>
+                                <span class="text-xs text-gray-500">${timeInfo.time}</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <button onclick="viewDetails('${contact._id}')" class="text-blue-600 hover:text-blue-800 mx-1" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button onclick="deleteContact('${contact._id}')" class="text-red-600 hover:text-red-800 mx-1" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function getTimeInfo(submittedAt) {
+            const now = new Date();
+            const submitDate = new Date(submittedAt);
+            const diffMs = now - submitDate;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+
+            const time = submitDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            const date = submitDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+            if (diffMins < 1) return { label: 'Just now', time: time, badgeClass: 'badge-new' };
+            if (diffMins < 60) return { label: `${diffMins}m ago`, time: time, badgeClass: 'badge-new' };
+            if (diffHours < 24 && now.getDate() === submitDate.getDate()) {
+                return { label: 'Today', time: time, badgeClass: 'badge-today' };
+            }
+            if (diffDays === 1 || (diffHours < 48 && now.getDate() - submitDate.getDate() === 1)) {
+                return { label: 'Yesterday', time: time, badgeClass: 'badge-yesterday' };
+            }
+            if (diffDays <= 7) {
+                return { label: `${diffDays} days ago`, time: time, badgeClass: 'badge-week' };
+            }
+            return { label: date, time: time, badgeClass: 'badge-older' };
+        }
+
+        function updateStats(contacts) {
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const weekAgo = new Date(now - 7 * 24 * 60 * 60 * 1000);
+            const monthAgo = new Date(now.getFullYear(), now.getMonth(), 1);
+
+            const todayCount = contacts.filter(c => new Date(c.submittedAt) >= today).length;
+            const weekCount = contacts.filter(c => new Date(c.submittedAt) >= weekAgo).length;
+            const monthCount = contacts.filter(c => new Date(c.submittedAt) >= monthAgo).length;
+
+            document.getElementById('totalCount').textContent = contacts.length;
+            document.getElementById('todayCount').textContent = todayCount;
+            document.getElementById('weekCount').textContent = weekCount;
+            document.getElementById('monthCount').textContent = monthCount;
+        }
+
+        function formatServiceType(type) {
+            const serviceMap = {
+                'online-courses': 'Online Courses',
+                'web-development': 'Web Development',
+                'lms-solutions': 'LMS Solutions',
+                'course-development': 'Course Development',
+                'placement-support': 'Placement Support',
+                'technical-training': 'Technical Training',
+                'custom-software': 'Custom Software',
+                'ui-ux-design': 'UI/UX Design',
+                'consulting': 'Consulting',
+                'other': 'Other'
+            };
+            return serviceMap[type] || type;
+        }
+
+        function showLoading() {
+            document.getElementById('loadingState').classList.remove('hidden');
+            document.getElementById('errorState').classList.add('hidden');
+            document.getElementById('contactsTable').classList.add('hidden');
+            document.getElementById('emptyState').classList.add('hidden');
+        }
+
+        function showError(message) {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('errorState').classList.remove('hidden');
+            document.getElementById('contactsTable').classList.add('hidden');
+            document.getElementById('emptyState').classList.add('hidden');
+            document.getElementById('errorMessage').textContent = message;
+        }
+
+        function refreshData() {
+            fetchContacts();
+        }
+
+        function viewDetails(contactId) {
+            const contact = allContacts.find(c => c._id === contactId);
+            if (!contact) return;
+
+            const timeInfo = getTimeInfo(contact.submittedAt);
+
+            alert(`
+Contact Details:
+
+Name: ${contact.fullName}
+Email: ${contact.email}
+Mobile: +91 ${contact.mobile}
+Service: ${formatServiceType(contact.serviceType)}
+Message: ${contact.message || 'No message'}
+
+Submitted: ${timeInfo.label} at ${timeInfo.time}
+IP Address: ${contact.ipAddress || 'N/A'}
+User Agent: ${contact.userAgent || 'N/A'}
+            `.trim());
+        }
+
+        async function deleteContact(contactId) {
+            if (!confirm('Are you sure you want to delete this contact submission?')) {
+                return;
+            }
+
+            try {
+                // Note: You'll need to add a DELETE route in the backend
+                alert('Delete functionality coming soon!');
+                // const response = await fetch(`${API_URL}/contact/${contactId}`, {
+                //     method: 'DELETE',
+                //     headers: { 'Authorization': `Bearer ${token}` }
+                // });
+                // if (response.ok) {
+                //     fetchContacts();
+                // }
+            } catch (error) {
+                console.error('Error deleting contact:', error);
+                alert('Failed to delete contact');
+            }
+        }
+    </script>
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.2);text-decoration:none;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses%20in%20Hyderabad"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat with us on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,0.25);text-decoration:none;transition:transform 0.2s ease;"
+   onmouseover="this.style.transform='scale(1.1)'"
+   onmouseout="this.style.transform='scale(1)'">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

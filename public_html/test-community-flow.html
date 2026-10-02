@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://www.blujaytech.com/test-community-flow.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Community Flow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/responsive-global.css">
+</head>
+
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold mb-4">Community Flow Test</h1>
+
+        <div class="space-y-4">
+            <div class="border p-4 rounded">
+                <h2 class="font-bold mb-2">1. Check Authentication</h2>
+                <button onclick="checkAuth()" class="bg-blue-600 text-white px-4 py-2 rounded">Check Auth</button>
+                <pre id="authResult" class="mt-2 text-xs bg-gray-100 p-2 rounded overflow-auto"></pre>
+            </div>
+
+            <div class="border p-4 rounded">
+                <h2 class="font-bold mb-2">2. Check Community Profile</h2>
+                <button onclick="checkProfile()" class="bg-green-600 text-white px-4 py-2 rounded">Check
+                    Profile</button>
+                <pre id="profileResult" class="mt-2 text-xs bg-gray-100 p-2 rounded overflow-auto"></pre>
+            </div>
+
+            <div class="border p-4 rounded">
+                <h2 class="font-bold mb-2">3. Session Storage</h2>
+                <button onclick="checkSession()" class="bg-purple-600 text-white px-4 py-2 rounded">Check
+                    Session</button>
+                <pre id="sessionResult" class="mt-2 text-xs bg-gray-100 p-2 rounded overflow-auto"></pre>
+            </div>
+
+            <div class="border p-4 rounded">
+                <h2 class="font-bold mb-2">4. Local Storage</h2>
+                <button onclick="checkLocal()" class="bg-orange-600 text-white px-4 py-2 rounded">Check Local</button>
+                <pre id="localResult" class="mt-2 text-xs bg-gray-100 p-2 rounded overflow-auto"></pre>
+            </div>
+
+            <div class="border p-4 rounded">
+                <h2 class="font-bold mb-2">Quick Actions</h2>
+                <div class="flex gap-2 flex-wrap">
+                    <button onclick="clearAll()" class="bg-red-600 text-white px-4 py-2 rounded">Clear All</button>
+                    <button onclick="setContext('community', 'RECEIVER')"
+                        class="bg-blue-500 text-white px-4 py-2 rounded">Set RECEIVER Context</button>
+                    <button onclick="setContext('community', 'GIVER')"
+                        class="bg-green-500 text-white px-4 py-2 rounded">Set GIVER Context</button>
+                    <button onclick="window.location.href='post-login-router.html'"
+                        class="bg-purple-500 text-white px-4 py-2 rounded">Test Router</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://blujay-backend.onrender.com/api';
+
+        function checkAuth() {
+            const token = localStorage.getItem('authToken');
+            const role = localStorage.getItem('userRole');
+            const result = {
+                hasToken: !!token,
+                tokenLength: token ? token.length : 0,
+                role: role,
+                email: localStorage.getItem('userEmail'),
+                name: localStorage.getItem('userName')
+            };
+            document.getElementById('authResult').textContent = JSON.stringify(result, null, 2);
+        }
+
+        async function checkProfile() {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                document.getElementById('profileResult').textContent = 'No auth token found. Please login first.';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/community/my-profile`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+                document.getElementById('profileResult').textContent = JSON.stringify({
+                    status: response.status,
+                    data: data
+                }, null, 2);
+            } catch (error) {
+                document.getElementById('profileResult').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        function checkSession() {
+            const result = {
+                loginContext: sessionStorage.getItem('loginContext'),
+                requestedProfile: sessionStorage.getItem('requestedProfile'),
+                creatingProfile: sessionStorage.getItem('creatingProfile')
+            };
+            document.getElementById('sessionResult').textContent = JSON.stringify(result, null, 2);
+        }
+
+        function checkLocal() {
+            const result = {
+                authToken: localStorage.getItem('authToken') ? '***exists***' : null,
+                userRole: localStorage.getItem('userRole'),
+                userName: localStorage.getItem('userName'),
+                userEmail: localStorage.getItem('userEmail'),
+                userId: localStorage.getItem('userId')
+            };
+            document.getElementById('localResult').textContent = JSON.stringify(result, null, 2);
+        }
+
+        function clearAll() {
+            localStorage.clear();
+            sessionStorage.clear();
+            alert('All storage cleared!');
+            checkAuth();
+            checkSession();
+            checkLocal();
+        }
+
+        function setContext(context, profile) {
+            sessionStorage.setItem('loginContext', context);
+            sessionStorage.setItem('requestedProfile', profile);
+            alert(`Context set: ${context} / ${profile}`);
+            checkSession();
+        }
+
+        // Auto-run checks on load
+        window.onload = () => {
+            checkAuth();
+            checkSession();
+            checkLocal();
+        };
+    </script>
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.2);text-decoration:none;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses%20in%20Hyderabad"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat with us on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,0.25);text-decoration:none;transition:transform 0.2s ease;"
+   onmouseover="this.style.transform='scale(1.1)'"
+   onmouseout="this.style.transform='scale(1)'">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

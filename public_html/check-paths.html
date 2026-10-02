@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://www.blujaytech.com/check-paths.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path Checker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/responsive-global.css">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow">
+        <h1 class="text-3xl font-bold mb-6">🔍 Path Checker</h1>
+        
+        <div class="space-y-4">
+            <div class="bg-blue-50 p-4 rounded">
+                <h2 class="font-bold">Current Location:</h2>
+                <p id="current-location" class="font-mono text-sm"></p>
+            </div>
+            
+            <div class="bg-green-50 p-4 rounded">
+                <h2 class="font-bold">Base URL:</h2>
+                <p id="base-url" class="font-mono text-sm"></p>
+            </div>
+            
+            <div class="bg-purple-50 p-4 rounded">
+                <h2 class="font-bold">Test Paths:</h2>
+                <div id="test-results" class="space-y-2 mt-2"></div>
+            </div>
+            
+            <button onclick="testAllPaths()" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
+                Test All Paths
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Display current location
+        document.getElementById('current-location').textContent = window.location.href;
+        document.getElementById('base-url').textContent = window.location.origin + '/' + window.location.pathname.split('/')[1] + '/';
+
+        const paths = [
+            'community/receiver-profile.html',
+            'community/giver-profile.html',
+            'community/receiver-dashboard.html',
+            'community/giver-dashboard.html',
+            'community/role-selection.html',
+            'community/index.html',
+            'post-login-router.html',
+            'login.html',
+            'dashboard.html'
+        ];
+
+        async function testPath(path) {
+            try {
+                const response = await fetch(path, { method: 'HEAD' });
+                return { path, exists: response.ok, status: response.status };
+            } catch (error) {
+                return { path, exists: false, status: 'Error', error: error.message };
+            }
+        }
+
+        async function testAllPaths() {
+            const resultsDiv = document.getElementById('test-results');
+            resultsDiv.innerHTML = '<p class="text-gray-600">Testing paths...</p>';
+            
+            const results = await Promise.all(paths.map(testPath));
+            
+            resultsDiv.innerHTML = results.map(result => {
+                const color = result.exists ? 'text-green-600' : 'text-red-600';
+                const icon = result.exists ? '✅' : '❌';
+                return `
+                    <div class="flex items-center justify-between p-2 border-b">
+                        <span class="font-mono text-sm">${result.path}</span>
+                        <span class="${color}">${icon} ${result.status}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Auto-run on load
+        testAllPaths();
+    </script>
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.2);text-decoration:none;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

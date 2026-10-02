@@ -1,0 +1,262 @@
+/* ==========================================================================
+   Blujay Tech - Blog Module Styles (Vanilla CSS)
+   ========================================================================== */
+
+/* Variables */
+:root {
+    --blog-primary: #0057A0;
+    --blog-primary-hover: #00447C;
+    --blog-text-dark: #111827;
+    --blog-text-light: #4b5563;
+    /* slightly darker for better readability */
+    --blog-bg-card: #ffffff;
+    --blog-bg-body: #f9fafb;
+    --blog-border: rgba(0, 0, 0, 0.04);
+    /* Premium elegant shadows */
+    --blog-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    --blog-shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Base resets for blog components */
+.blog-main-container {
+    background-color: var(--blog-bg-body);
+    font-family: 'Inter', sans-serif;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    min-height: 100vh;
+}
+
+.blog-main-container>.max-w-7xl {
+    max-width: 1080px;
+    /* Slightly wider to accommodate nicer cards */
+    margin: 0 auto;
+}
+
+/* 
+ * Responsive Grid Layout 
+ * Enforcing vanilla CSS grid as requested (overrides Tailwind utility if present) 
+ */
+.blog-grid {
+    display: grid;
+    gap: 2.5rem;
+    /* Increased gap for better breathing room */
+    /* Mobile: 1 Column */
+    grid-template-columns: 1fr;
+}
+
+/* Tablet: 2 Columns */
+@media (min-width: 768px) {
+    .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop: 3 Columns */
+@media (min-width: 1024px) {
+    .blog-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Blog Cards Styling */
+.blog-card {
+    background-color: var(--blog-bg-card);
+    border-radius: 1.25rem;
+    /* Smoother, rounder corners */
+    overflow: hidden;
+    box-shadow: var(--blog-shadow);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Elegant easing */
+    border: 1px solid var(--blog-border);
+    cursor: pointer;
+}
+
+.blog-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--blog-shadow-hover);
+    border-color: rgba(0, 87, 160, 0.15);
+}
+
+/* Image Container */
+.blog-card-image {
+    width: 100%;
+    height: 13.5rem;
+    /* Taller image */
+    position: relative;
+    overflow: hidden;
+    background-color: #f3f4f6;
+}
+
+.blog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blog-card:hover .blog-card-image img {
+    transform: scale(1.06);
+    /* Subtler, premium zoom */
+}
+
+/* Card Content Area */
+.blog-card .p-6 {
+    padding: 1.75rem;
+    /* More generous padding inside card */
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Ensure meta info wraps correctly and looks premium */
+.blog-card .gap-2 {
+    flex-wrap: wrap;
+}
+
+/* Make category tags strictly pill-shaped and elegant */
+.blog-card .gap-2>span:first-child {
+    border-radius: 9999px !important;
+    padding: 0.35rem 0.85rem !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.05em;
+    margin-right: 0.25rem;
+}
+
+/* Perfect circle save/bookmark icon */
+.blog-card .top-4.right-4 {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    /* Soft shadow on the floating action */
+}
+
+/* Badges */
+.blog-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    /* Fully pill-shaped */
+    display: inline-block;
+}
+
+/* Typography */
+.blog-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    /* Robust, modern weight */
+    color: var(--blog-text-dark);
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+    transition: color 0.3s ease;
+}
+
+.blog-card:hover .blog-title {
+    color: var(--blog-primary);
+}
+
+.blog-description {
+    font-size: 0.875rem;
+    /* Readable font size */
+    color: var(--blog-text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Read More Button Area */
+.blog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    margin-top: auto;
+    border-top: 1px solid #f3f4f6;
+}
+
+.blog-read-more {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--blog-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.blog-read-more i {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.blog-read-more:hover {
+    color: var(--blog-primary-hover);
+}
+
+.blog-read-more:hover i {
+    transform: translateX(4px);
+}
+
+/* Detail Page Specifics */
+.blog-article-header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--blog-border);
+    padding-bottom: 2rem;
+}
+
+.blog-main-container article h1 {
+    font-size: clamp(2rem, 3.6vw, 3.25rem);
+    line-height: 1.15;
+}
+
+@media (max-width: 640px) {
+    .blog-main-container article h1 {
+        font-size: 1.75rem;
+        line-height: 1.18;
+        text-align: center;
+    }
+}
+
+.blog-article-content {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #374151;
+}
+
+.blog-article-content h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--blog-text-dark);
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+}
+
+.blog-article-content p {
+    margin-bottom: 1.5rem;
+}
+
+.blog-article-content blockquote {
+    border-left: 4px solid var(--blog-primary);
+    padding-left: 1.5rem;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--blog-text-dark);
+    margin: 2rem 0;
+    background: #f0f7ff;
+    padding: 1.5rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+}

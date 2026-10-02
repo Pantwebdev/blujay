@@ -1,0 +1,167 @@
+/* Global responsive safety layer for all pages */
+:root {
+    --site-max-width: 1400px;
+    --site-side-gap: clamp(14px, 2.2vw, 34px);
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+html,
+body {
+    max-width: 100%;
+}
+
+body {
+    overflow-x: clip;
+}
+
+img,
+svg,
+video,
+canvas,
+iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Prevent long strings from pushing layouts */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+span,
+a,
+small,
+label {
+    overflow-wrap: anywhere;
+}
+
+table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Keep common wrapper classes centered and safe on wide monitors */
+.container,
+.max-w-7xl,
+.max-w-6xl,
+.max-w-5xl,
+.max-w-4xl,
+.max-w-screen-xl,
+.max-w-screen-2xl {
+    width: min(100% - (var(--site-side-gap) * 2), var(--site-max-width));
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Avoid horizontal overflow from long text in cards/forms */
+.card,
+.modal-content,
+[class*="card"],
+[class*="modal"] {
+    min-width: 0;
+}
+
+/* Ensure nested flex/grid items can shrink on narrow viewports */
+.grid > *,
+[class*="grid"] > *,
+.flex > *,
+[class*="flex"] > * {
+    min-width: 0;
+}
+
+input,
+select,
+textarea {
+    max-width: 100%;
+}
+
+/* Ultra-wide monitor tuning */
+@media (min-width: 1600px) {
+    :root {
+        --site-max-width: 1520px;
+    }
+
+    body {
+        font-size: 17px;
+    }
+
+    h1 {
+        line-height: 1.1;
+    }
+
+    section {
+        padding-left: clamp(20px, 1.5vw, 44px);
+        padding-right: clamp(20px, 1.5vw, 44px);
+    }
+}
+
+/* Tablet and below */
+@media (max-width: 1024px) {
+    :root {
+        --site-side-gap: 16px;
+    }
+
+    section,
+    .section {
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+    }
+}
+
+/* Mobile layout safety */
+@media (max-width: 768px) {
+    body {
+        font-size: 15px;
+        line-height: 1.55;
+    }
+
+    h1 {
+        font-size: clamp(1.6rem, 6.5vw, 2.2rem);
+    }
+
+    h2 {
+        font-size: clamp(1.35rem, 5.4vw, 1.9rem);
+    }
+
+    .modal-content {
+        width: min(96vw, 680px);
+        max-height: 90vh;
+        margin-inline: auto;
+    }
+
+    .btn,
+    button,
+    [role="button"] {
+        min-height: 42px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --site-side-gap: 12px;
+    }
+
+    body {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .whatsapp-float,
+    a[aria-label*="WhatsApp"] {
+        width: 48px !important;
+        height: 48px !important;
+        bottom: 14px !important;
+        right: 14px !important;
+    }
+}

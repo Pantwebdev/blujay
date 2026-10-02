@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://www.blujaytech.com/admin\admin-jobs.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Jobs & Sync - Blujay Admin</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- ✅ Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --blujay-primary: #1D5D7F;
+            --blujay-secondary: #0057A0;
+        }
+
+        .bg-blujay {
+            background-color: var(--blujay-primary);
+        }
+
+        .text-blujay {
+            color: var(--blujay-primary);
+        }
+
+        .sync-log-container {
+            background: #1a1a1a;
+            color: #d1d1d1;
+            font-family: 'Consolas', 'Monaco', monospace;
+            border-radius: 12px;
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .log-entry {
+            margin-bottom: 4px;
+            border-left: 2px solid #333;
+            padding-left: 10px;
+            font-size: 13px;
+        }
+
+        .log-info {
+            color: #4fc3f7;
+        }
+
+        .log-success {
+            color: #81c784;
+        }
+
+        .log-warn {
+            color: #ffd54f;
+        }
+
+        .log-error {
+            color: #e57373;
+        }
+
+        /* Pulse for syncing */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .syncing-active {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+    <link rel="stylesheet" href="../css/responsive-global.css">
+</head>
+
+<body class="bg-gray-50">
+    <!-- Main Header -->
+    
+    <link rel="canonical" href="https://www.blujaytech.com/admin\admin-jobs.html">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-3">
+                    <a href="admin-dashboard.html" class="flex items-center gap-2">
+                        <img fetchpriority="high" height="400" width="600" src="../images/logo.webp" alt="Blujay" class="h-8 w-auto">
+                        <span class="font-bold text-xl text-blujay">Admin Portal</span>
+                    </a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span id="pipeline-status-badge"
+                        class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full border border-green-200">
+                        <i class="fas fa-check-circle mr-1"></i> Pipeline Ready
+                    </span>
+                    <a href="admin-dashboard.html"
+                        class="text-sm font-medium text-gray-500 hover:text-blujay">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 lg:px-8 py-10">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Job Pipeline & <span
+                        class="text-blujay">Ingestion</span></h1>
+                <p class="text-gray-500 mt-2">Manage automated job updates from XML feeds and external sources.</p>
+            </div>
+            <button id="trigger-sync-btn"
+                class="bg-blujay text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-blujay/20 hover:scale-105 transition-all">
+                <i class="fas fa-sync-alt mr-2"></i> Trigger Full Sync
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Col: Stats & Controls -->
+            <div class="lg:col-span-1 space-y-6">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                    <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-chart-pie mr-2 text-blujay"></i> Live Pipeline Stats
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-50">
+                            <span class="text-sm text-gray-500">Total Jobs</span>
+                            <span id="stat-total-jobs" class="font-bold">-</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-50">
+                            <span class="text-sm text-gray-500">XML Sources</span>
+                            <span class="font-bold">20</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-50">
+                            <span class="text-sm text-gray-500">Last Successful Run</span>
+                            <span id="stat-last-run" class="text-xs font-medium text-gray-600">-</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">Next Scheduled Run</span>
+                            <span class="text-xs font-medium text-blue-600">Today, 00:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                    <h3 class="font-bold text-gray-800 mb-4">Pipeline Configuration</h3>
+                    <div class="space-y-3">
+                        <label
+                            class="flex items-center gap-3 cursor-pointer p-3 hover:bg-gray-50 rounded-xl transition">
+                            <input type="checkbox" checked disabled class="w-5 h-5 rounded border-gray-300 text-blujay">
+                            <div>
+                                <p class="text-sm font-bold text-gray-800">Direct XML Feeds</p>
+                                <p class="text-xs text-gray-500">20 Primary feeds active</p>
+                            </div>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 cursor-pointer p-3 hover:bg-gray-50 rounded-xl transition">
+                            <input type="checkbox" checked disabled class="w-5 h-5 rounded border-gray-300 text-blujay">
+                            <div>
+                                <p class="text-sm font-bold text-gray-800">LinkedIn Scraper</p>
+                                <p class="text-xs text-gray-500">Apify integration simulation</p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-gray-100">
+                        <p class="text-xs font-bold text-red-500 uppercase tracking-widest mb-4">Danger Zone</p>
+                        <button id="clear-all-jobs-btn"
+                            class="w-full py-3 bg-red-50 text-red-600 text-sm font-bold rounded-xl border border-red-100 hover:bg-red-100 transition-all">
+                            <i class="fas fa-trash-alt mr-2"></i> Clear All Jobs
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Col: Sync Logs & Terminal -->
+            <div class="lg:col-span-2 space-y-6">
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                    <div class="bg-gray-900 px-6 py-4 flex justify-between items-center">
+                        <h3 class="text-white font-bold flex items-center">
+                            <i class="fas fa-terminal mr-3 text-green-400"></i>
+                            Pipeline Terminal <span id="syncing-indicator"
+                                class="ml-4 text-xs font-normal text-yellow-400 hidden">INGESTING DATA...</span>
+                        </h3>
+                        <div class="flex gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 bg-gray-900 border-t border-gray-800">
+                        <div id="sync-logs" class="sync-log-container">
+                            <div class="log-entry log-info text-gray-500">System Ready. Awaiting manual trigger or
+                                scheduled pulse...</div>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <p class="text-xs text-gray-500">Blujay Job Pipeline v2.1 | Pro Engine</p>
+                            <button id="clear-logs" class="text-xs text-gray-500 hover:text-white underline">Clear
+                                Terminal</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Jobs Table Preview -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 overflow-hidden">
+                    <h3 class="font-bold text-gray-800 mb-4">Latest Ingested Jobs</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="text-xs text-gray-400 border-b">
+                                    <th class="pb-3 font-semibold">Title</th>
+                                    <th class="pb-3 font-semibold">Company</th>
+                                    <th class="pb-3 font-semibold">Posted</th>
+                                    <th class="pb-3 font-semibold text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-jobs-body">
+                                <tr>
+                                    <td colspan="4" class="py-10 text-center text-gray-400">No recent data loaded</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/api-config.js"></script>
+    <script>
+        const API_BASE = window.API_CONFIG ? window.API_CONFIG.getApiUrl() : '/api';
+        let isSyncing = false;
+
+        async function init() {
+            // Check auth (simplified for now)
+            await loadStats();
+            await loadRecentJobs();
+        }
+
+        async function loadStats() {
+            try {
+                const res = await fetch(`${API_BASE}/jobs`);
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('stat-total-jobs').innerText = data.count;
+                }
+            } catch (err) { console.error(err); }
+        }
+
+        async function loadRecentJobs() {
+            try {
+                const res = await fetch(`${API_BASE}/jobs?limit=5`);
+                const data = await res.json();
+                const body = document.getElementById('recent-jobs-body');
+                if (data.success && data.data.length > 0) {
+                    body.innerHTML = data.data.slice(0, 5).map(j => `
+                        <tr class="border-b border-gray-50 text-sm">
+                            <td class="py-4 font-bold text-gray-800">${j.title.substring(0, 30)}...</td>
+                            <td class="py-4 text-gray-600">${j.company}</td>
+                            <td class="py-4 text-gray-500">${new Date(j.postedAt).toLocaleDateString()}</td>
+                            <td class="py-4 text-right">
+                                <a href="${j.applyUrl}" target="_blank" class="text-blujay hover:underline font-semibold">View</a>
+                            </td>
+                        </tr>
+                    `).join('');
+                }
+            } catch (err) { console.error(err); }
+        }
+
+        function addLog(msg, type = 'info') {
+            const container = document.getElementById('sync-logs');
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            const time = new Date().toLocaleTimeString();
+            entry.innerHTML = `<span class="text-gray-600">[${time}]</span> ${msg}`;
+            container.appendChild(entry);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        document.getElementById('trigger-sync-btn').addEventListener('click', async () => {
+            if (isSyncing) return;
+
+            isSyncing = true;
+            const btn = document.getElementById('trigger-sync-btn');
+            const indicator = document.getElementById('syncing-indicator');
+            const badge = document.getElementById('pipeline-status-badge');
+
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Syncing...';
+            btn.classList.add('opacity-50', 'cursor-not-allowed');
+            indicator.classList.remove('hidden');
+            badge.className = 'px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full border border-yellow-200';
+            badge.innerHTML = '<i class="fas fa-circle-notch fa-spin mr-1"></i> Running...';
+
+            addLog('Initializing Pipeline v2.1...', 'info');
+            addLog('Connecting to MongoDB Secure Cluster...', 'info');
+
+            try {
+                // We'll use our new endpoint
+                const token = localStorage.getItem('idToken') || ''; // Assuming token is here
+                const res = await fetch(`${API_BASE}/admin/jobs/sync`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                const result = await res.json();
+
+                if (result.success) {
+                    addLog('Phase 1: XML Feeds Synchronized Successfully.', 'success');
+                    addLog(`Total Pipeline Duration: ${result.duration}`, 'success');
+                    addLog('Database re-indexed for search optimization.', 'info');
+                    addLog('PIPELINE COMPLETE.', 'success');
+
+                    document.getElementById('stat-last-run').innerText = new Date().toLocaleString();
+                    badge.className = 'px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full border border-green-200';
+                    badge.innerHTML = '<i class="fas fa-check-circle mr-1"></i> Sync Successful';
+                } else {
+                    addLog(`Pipeline Error: ${result.error || 'Access Denied'}`, 'error');
+                    badge.className = 'px-3 py-1 bg-red-100 text-red-700 text-xs font-bold rounded-full border border-red-200';
+                    badge.innerHTML = '<i class="fas fa-exclamation-triangle mr-1"></i> Sync Failed';
+                }
+            } catch (err) {
+                addLog(`Network/Connection Error: ${err.message}`, 'error');
+            } finally {
+                isSyncing = false;
+                btn.innerHTML = '<i class="fas fa-sync-alt mr-2"></i> Trigger Full Sync';
+                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                indicator.classList.add('hidden');
+                loadStats();
+                loadRecentJobs();
+            }
+        });
+
+        document.getElementById('clear-logs').addEventListener('click', () => {
+            document.getElementById('sync-logs').innerHTML = '<div class="log-entry log-info text-gray-500">Terminal Cleared.</div>';
+        });
+
+        document.getElementById('clear-all-jobs-btn').addEventListener('click', async () => {
+            const confirmed = confirm('⚠️ CRITICAL: This will permanently delete ALL jobs from the portal. Are you 100% sure?');
+            if (!confirmed) return;
+
+            const doubleConfirmed = confirm('Last warning: Data cannot be recovered. Proceed?');
+            if (!doubleConfirmed) return;
+
+            const btn = document.getElementById('clear-all-jobs-btn');
+            const originalText = btn.innerHTML;
+
+            try {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Clearing...';
+
+                const token = localStorage.getItem('authToken') || '';
+                const res = await fetch(`${API_BASE}/admin/jobs/clear-all`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                const result = await res.json();
+
+                if (result.success) {
+                    addLog(`Success: ${result.message}`, 'success');
+                    alert(`Job portal cleared! Deleted ${result.count} jobs.`);
+                    loadStats();
+                    loadRecentJobs();
+                } else {
+                    addLog(`Error: ${result.error || 'Failed to clear jobs'}`, 'error');
+                }
+            } catch (err) {
+                addLog(`Network Error: ${err.message}`, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        });
+
+        init();
+    </script>
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.2);text-decoration:none;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses%20in%20Hyderabad"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat with us on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,0.25);text-decoration:none;transition:transform 0.2s ease;"
+   onmouseover="this.style.transform='scale(1.1)'"
+   onmouseout="this.style.transform='scale(1)'">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

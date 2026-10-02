@@ -1,0 +1,2395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://www.blujaytech.com/community\index.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Training Institute Hyderabad | Python, Java, AWS DevOps | Blujay Technologies</title>
+    
+    <script src="toast-notifications.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --blujay-primary: #0057A0;
+            --blujay-primary-hover: #00447C;
+            --blujay-light: #E6F1FB;
+            --blujay-dark: #003D73;
+            --success: #10B981;
+            --success-dark: #059669;
+            --warning: #F59E0B;
+            --info: #3B82F6;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+        }
+
+        body {
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navigation Header */
+        .nav-header {
+            background: white;
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            text-decoration: none;
+            color: var(--gray-900);
+            font-weight: 700;
+            font-size: 1.25rem;
+            transition: all 300ms ease;
+        }
+
+        .nav-brand:hover {
+            color: var(--blujay-primary);
+            transform: translateX(-2px);
+        }
+
+        .nav-brand span {
+            background: linear-gradient(135deg, var(--blujay-primary) 0%, var(--info) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .nav-logo {
+            height: 40px;
+            width: auto;
+            transition: transform 300ms ease;
+        }
+
+        .nav-brand:hover .nav-logo {
+            transform: scale(1.05);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.25rem;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: all 200ms ease;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--blujay-primary) 0%, var(--blujay-dark) 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,87,160,0.15);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,87,160,0.25);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(180deg, #F0F7FF 0%, #FFFFFF 100%);
+            padding: 4rem 0 5rem 0;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--blujay-light);
+            color: var(--blujay-primary);
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 2.75rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+        }
+
+        /* Trust Indicators */
+        .trust-indicators {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .trust-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .trust-icon.success {
+            background: #D1FAE5;
+            color: var(--success);
+        }
+
+        .trust-icon.primary {
+            background: var(--blujay-light);
+            color: var(--blujay-primary);
+        }
+
+        .trust-icon.warning {
+            background: #FEF3C7;
+            color: var(--warning);
+        }
+
+        /* Role Cards */
+        .role-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 1.75rem;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .role-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 300ms ease;
+        }
+
+        .role-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,87,160,0.12);
+            border-color: var(--blujay-light);
+        }
+
+        .role-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .role-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .role-icon.blue {
+            background: linear-gradient(135deg, var(--blujay-primary) 0%, var(--blujay-dark) 100%);
+        }
+
+        .role-icon.green {
+            background: linear-gradient(135deg, var(--success) 0%, var(--success-dark) 100%);
+        }
+
+        .role-title {
+            font-size: 1.375rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.375rem;
+        }
+
+        .role-description {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+
+        .role-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.625rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .benefit-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.375rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            border-radius: 50px;
+        }
+
+        .benefit-badge.blue {
+            background: #DBEAFE;
+            color: #1D4ED8;
+        }
+
+        .benefit-badge.green {
+            background: #D1FAE5;
+            color: #059669;
+        }
+
+        .benefit-badge.purple {
+            background: #E9D5FF;
+            color: #7C3AED;
+        }
+
+        .btn-primary {
+            width: 100%;
+            justify-content: center;
+            padding: 0.875rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, var(--blujay-primary) 0%, var(--blujay-dark) 100%);
+            border-radius: 0.5rem;
+            transition: all 200ms ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,87,160,0.25);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success) 0%, var(--success-dark) 100%);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 6px 16px rgba(16,185,129,0.25);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 5rem 0 6rem 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.0625rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            padding: 2.25rem 1.75rem;
+            text-align: center;
+            border-radius: 0.75rem;
+            color: white;
+            transition: all 300ms ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .stat-card.blue {
+            background: linear-gradient(135deg, var(--blujay-primary) 0%, var(--blujay-dark) 100%);
+            box-shadow: 0 4px 6px rgba(0,87,160,0.15);
+        }
+
+        .stat-card.blue:hover {
+            box-shadow: 0 12px 20px rgba(0,87,160,0.25);
+        }
+
+        .stat-card.green {
+            background: linear-gradient(135deg, var(--success) 0%, var(--success-dark) 100%);
+            box-shadow: 0 4px 6px rgba(16,185,129,0.15);
+        }
+
+        .stat-card.green:hover {
+            box-shadow: 0 12px 20px rgba(16,185,129,0.25);
+        }
+
+        .stat-card.info {
+            background: linear-gradient(135deg, var(--info) 0%, #2563EB 100%);
+            box-shadow: 0 4px 6px rgba(59,130,246,0.15);
+        }
+
+        .stat-card.info:hover {
+            box-shadow: 0 12px 20px rgba(59,130,246,0.25);
+        }
+
+        .stat-card.warning {
+            background: linear-gradient(135deg, var(--warning) 0%, #D97706 100%);
+            box-shadow: 0 4px 6px rgba(245,158,11,0.15);
+        }
+
+        .stat-card.warning:hover {
+            box-shadow: 0 12px 20px rgba(245,158,11,0.25);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9375rem;
+            opacity: 0.95;
+        }
+
+        /* Community Members Section */
+        .members-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 700px;
+            margin: 3rem auto 3.5rem;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 1rem;
+            background: white;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            border: 2px solid var(--gray-200);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 300ms ease;
+        }
+
+        .search-box:focus-within {
+            border-color: var(--blujay-primary);
+            box-shadow: 0 4px 16px rgba(0,87,160,0.15);
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            padding: 0.5rem 0.75rem;
+            color: var(--gray-900);
+        }
+
+        .search-input::placeholder {
+            color: #C0C0C0;
+            opacity: 0.7;
+        }
+
+        .search-btn {
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, var(--blujay-primary) 0%, var(--blujay-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 300ms ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,87,160,0.3);
+        }
+
+        /* Filter Chips */
+        .filter-chips {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .filter-chip {
+            padding: 0.5rem 1.25rem;
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            cursor: pointer;
+            transition: all 200ms ease;
+        }
+
+        .filter-chip:hover {
+            background: var(--blujay-light);
+            border-color: var(--blujay-primary);
+            color: var(--blujay-primary);
+        }
+
+        .filter-chip.active {
+            background: var(--blujay-primary);
+            border-color: var(--blujay-primary);
+            color: white;
+        }
+
+        /* Members Container */
+        .members-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3.5rem;
+        }
+
+        .members-column {
+            background: var(--gray-50);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid var(--gray-200);
+            transition: all 300ms ease;
+        }
+
+        .members-column:hover {
+            border-color: var(--gray-300);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .members-column.givers {
+            border-color: rgba(0,87,160,0.12);
+        }
+
+        .members-column.givers:hover {
+            border-color: rgba(0,87,160,0.25);
+            box-shadow: 0 4px 12px rgba(0,87,160,0.08);
+        }
+
+        .members-column.seekers {
+            border-color: rgba(16,185,129,0.12);
+        }
+
+        .members-column.seekers:hover {
+            border-color: rgba(16,185,129,0.25);
+            box-shadow: 0 4px 12px rgba(16,185,129,0.08);
+        }
+
+        .column-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-200);
+            transition: all 300ms ease;
+        }
+
+        .members-column.givers .column-header {
+            border-bottom-color: rgba(0,87,160,0.15);
+        }
+
+        .members-column.seekers .column-header {
+            border-bottom-color: rgba(16,185,129,0.15);
+        }
+
+        .members-column.givers:hover .column-header {
+            border-bottom-color: rgba(0,87,160,0.3);
+        }
+
+        .members-column.seekers:hover .column-header {
+            border-bottom-color: rgba(16,185,129,0.3);
+        }
+
+        .column-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: white;
+        }
+
+        .column-icon.blue {
+            background: linear-gradient(135deg, var(--blujay-primary) 0%, var(--blujay-dark) 100%);
+        }
+
+        .column-icon.green {
+            background: linear-gradient(135deg, var(--success) 0%, var(--success-dark) 100%);
+        }
+
+        .column-title {
+            font-size: 1.375rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        /* Scrolling Profiles Container */
+        .profiles-scroll-container {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .profiles-scroll-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .profiles-scroll-container::-webkit-scrollbar-track {
+            background: var(--gray-200);
+            border-radius: 4px;
+        }
+
+        .profiles-scroll-container::-webkit-scrollbar-thumb {
+            background: var(--blujay-primary);
+            border-radius: 4px;
+        }
+
+        .profiles-scroll-container::-webkit-scrollbar-thumb:hover {
+            background: var(--blujay-dark);
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--gray-500);
+        }
+
+        .no-profiles {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--gray-600);
+        }
+
+        .no-profiles i {
+            font-size: 3rem;
+            color: var(--gray-300);
+            margin-bottom: 1rem;
+        }
+
+        .member-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #E8E8E8;
+            transition: all 300ms ease;
+        }
+
+        .member-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+            border-color: rgba(0,87,160,0.3);
+        }
+
+        .members-column.seekers .member-card:hover {
+            border-color: rgba(16,185,129,0.3);
+            box-shadow: 0 6px 16px rgba(16,185,129,0.08);
+        }
+
+        .member-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .member-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blujay-primary) 0%, var(--info) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.125rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            text-align: center;
+            line-height: 52px;
+        }
+
+        .member-avatar.green {
+            background: linear-gradient(135deg, var(--success) 0%, #34D399 100%);
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.25rem;
+        }
+
+        .member-role {
+            font-size: 0.8125rem;
+            color: var(--gray-600);
+        }
+
+        .member-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.25rem 0.625rem;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .member-badge.verified {
+            background: #D1FAE5;
+            color: #059669;
+        }
+
+        .member-badge.expert {
+            background: #DBEAFE;
+            color: #1D4ED8;
+        }
+
+        .member-details {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .member-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.8125rem;
+            color: var(--gray-600);
+        }
+
+        .member-stat i {
+            color: var(--blujay-primary);
+            font-size: 0.875rem;
+        }
+
+        .member-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tag {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        .member-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .member-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .stars {
+            color: var(--warning);
+        }
+
+        .btn-connect {
+            padding: 0.5rem 1rem;
+            font-size: 0.8125rem;
+            background: var(--blujay-primary);
+            color: white;
+            border-radius: 0.375rem;
+            border: 2px solid var(--blujay-primary);
+            transition: all 200ms ease;
+        }
+
+        .btn-connect:hover {
+            background: var(--blujay-primary-hover);
+            border-color: var(--blujay-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,87,160,0.25);
+        }
+
+        .members-column.seekers .btn-connect {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .members-column.seekers .btn-connect:hover {
+            background: var(--success-dark);
+            border-color: var(--success-dark);
+            box-shadow: 0 4px 12px rgba(16,185,129,0.25);
+        }
+
+        .view-all-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.625rem;
+            padding: 0.875rem 2rem;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            background: white;
+            color: var(--blujay-primary);
+            border-radius: 0.5rem;
+            border: 2px solid var(--blujay-primary);
+            text-decoration: none;
+            transition: all 200ms ease;
+            margin-top: 1.5rem;
+        }
+
+        .view-all-btn:hover {
+            background: var(--blujay-primary);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,87,160,0.2);
+        }
+
+        .members-column.seekers .view-all-btn {
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .members-column.seekers .view-all-btn:hover {
+            background: var(--success);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16,185,129,0.2);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 6rem 0;
+            background: var(--gray-50);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem 1.75rem;
+            text-align: center;
+            border-radius: 0.75rem;
+            border: 1px solid var(--gray-200);
+            transition: all 300ms ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            margin: 0 auto 1.25rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-icon.green {
+            background: linear-gradient(135deg, var(--success) 0%, var(--success-dark) 100%);
+        }
+
+        .feature-icon.blue {
+            background: linear-gradient(135deg, var(--blujay-primary) 0%, var(--blujay-dark) 100%);
+        }
+
+        .feature-icon.info {
+            background: linear-gradient(135deg, var(--info) 0%, #2563EB 100%);
+        }
+
+        .feature-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-description {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* How It Works Section */
+        .how-it-works-section {
+            padding: 4.5rem 0;
+            background: white;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .step-item {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 68px;
+            height: 68px;
+            margin: 0 auto 1.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .step-number.blue {
+            background: var(--blujay-light);
+            color: var(--blujay-primary);
+        }
+
+        .step-number.green {
+            background: #D1FAE5;
+            color: var(--success);
+        }
+
+        .step-number.info {
+            background: #DBEAFE;
+            color: var(--info);
+        }
+
+        .step-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .step-description {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--blujay-primary) 0%, var(--blujay-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .cta-subtitle {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            text-align: center;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--blujay-primary);
+        }
+
+        .btn-white:hover {
+            background: var(--gray-100);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand img {
+            height: 36px;
+            opacity: 0.9;
+        }
+
+        .footer-brand span {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .footer-text {
+            color: var(--gray-300);
+            font-size: 0.9375rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-tagline {
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        /* Tablet & Mobile Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.25rem;
+            }
+
+            /* Navigation */
+            .nav-container {
+                padding: 0.875rem 1.25rem;
+                gap: 1rem;
+            }
+
+            .nav-brand {
+                font-size: 1.0625rem;
+            }
+
+            .nav-logo {
+                height: 36px;
+            }
+
+            /* Hero Section */
+            .hero-section {
+                padding: 2.5rem 0 3.5rem 0;
+            }
+
+            .hero-badge {
+                font-size: 0.8125rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            /* Trust Indicators */
+            .trust-indicators {
+                gap: 1.5rem;
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .trust-item {
+                justify-content: center;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .trust-value {
+                font-size: 1.75rem;
+            }
+
+            /* Role Cards */
+            .role-cards {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .role-card {
+                padding: 2rem 1.5rem;
+            }
+
+            /* Search Container */
+            .search-container {
+                max-width: 100%;
+                margin: 2rem auto 2.5rem;
+            }
+
+            .search-box {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0.75rem;
+            }
+
+            .search-input {
+                width: 100%;
+                padding: 0.75rem;
+                font-size: 1rem;
+            }
+
+            .search-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 0.875rem;
+                font-size: 1rem;
+            }
+
+            /* Filter Chips */
+            .filter-chips {
+                gap: 0.5rem;
+                padding: 0 0.5rem;
+            }
+
+            .filter-chip {
+                padding: 0.625rem 1rem;
+                font-size: 0.8125rem;
+            }
+
+            /* All Sections */
+            .stats-section, .features-section, .how-it-works-section, .members-section {
+                padding: 3.5rem 0;
+            }
+
+            /* Stats Grid */
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            /* Features Grid */
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .feature-card {
+                padding: 2rem 1.5rem;
+            }
+
+            /* Steps Grid */
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            /* Members Container */
+            .members-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .members-column {
+                padding: 1.5rem;
+            }
+
+            .profiles-scroll-container {
+                max-height: 500px;
+            }
+
+            .member-card {
+                padding: 1.25rem;
+            }
+
+            .member-header {
+                gap: 0.875rem;
+            }
+
+            .member-details {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .member-stat {
+                font-size: 0.8125rem;
+            }
+
+            .member-skills {
+                gap: 0.5rem;
+            }
+
+            .skill-tag {
+                padding: 0.375rem 0.75rem;
+                font-size: 0.75rem;
+            }
+
+            .member-footer {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-connect {
+                width: 100%;
+                justify-content: center;
+            }
+
+            /* CTA Section */
+            .cta-title {
+                font-size: 1.75rem;
+            }
+
+            .cta-subtitle {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: row;
+                gap: 1rem;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .cta-buttons .btn {
+                width: auto;
+                min-width: 200px;
+            }
+
+            /* Section Headers */
+            .section-title {
+                font-size: 1.875rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+
+            /* Loading State */
+            .loading-state {
+                padding: 2rem;
+            }
+        }
+
+        /* Mobile Only (Small Screens) */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            /* Navigation */
+            .nav-container {
+                padding: 0.75rem 1rem;
+                flex-direction: row;
+                gap: 0.75rem;
+                flex-wrap: wrap;
+            }
+
+            .nav-brand {
+                font-size: 0.9375rem;
+            }
+
+            .nav-logo {
+                height: 32px;
+            }
+
+            .nav-container .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8125rem;
+                white-space: nowrap;
+            }
+
+            /* Hero Section */
+            .hero-section {
+                padding: 2rem 0 3rem 0;
+            }
+
+            .hero-badge {
+                font-size: 0.75rem;
+                padding: 0.5rem 0.875rem;
+            }
+
+            .hero-title {
+                font-size: 1.625rem;
+                line-height: 1.25;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9375rem;
+                line-height: 1.6;
+            }
+
+            /* Trust Indicators */
+            .trust-indicators {
+                gap: 1rem;
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .trust-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+                flex: 0 1 auto;
+            }
+
+            .trust-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1.125rem;
+            }
+
+            .trust-value {
+                font-size: 1.5rem;
+            }
+
+            .trust-label {
+                font-size: 0.8125rem;
+            }
+
+            /* Role Cards */
+            .role-card {
+                padding: 1.5rem 1.25rem;
+            }
+
+            .role-icon {
+                font-size: 2rem;
+            }
+
+            .role-title {
+                font-size: 1.25rem;
+            }
+
+            .role-description {
+                font-size: 0.875rem;
+            }
+
+            /* Search */
+            .search-container {
+                margin: 1.5rem auto 2rem;
+            }
+
+            .search-box {
+                padding: 0.875rem;
+            }
+
+            .search-input {
+                padding: 0.625rem;
+                font-size: 0.9375rem;
+            }
+
+            .search-btn {
+                padding: 0.75rem;
+                font-size: 0.9375rem;
+            }
+
+            /* Filter Chips */
+            .filter-chips {
+                gap: 0.5rem;
+            }
+
+            .filter-chip {
+                padding: 0.5rem 0.875rem;
+                font-size: 0.75rem;
+            }
+
+            /* All Sections */
+            .stats-section, .features-section, .how-it-works-section, .members-section {
+                padding: 2.5rem 0;
+            }
+
+            /* Stats Grid */
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+
+            .stat-card {
+                padding: 1.5rem 1.25rem;
+            }
+
+            .stat-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.125rem;
+            }
+
+            .stat-value {
+                font-size: 1.75rem;
+            }
+
+            .stat-label {
+                font-size: 0.875rem;
+            }
+
+            /* Features */
+            .feature-card {
+                padding: 1.5rem 1.25rem;
+            }
+
+            .feature-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.125rem;
+            }
+
+            .feature-title {
+                font-size: 1.125rem;
+            }
+
+            .feature-description {
+                font-size: 0.875rem;
+            }
+
+            /* Steps */
+            .step-card {
+                padding: 1.5rem 1.25rem;
+            }
+
+            .step-number {
+                font-size: 1.75rem;
+            }
+
+            .step-title {
+                font-size: 1.125rem;
+            }
+
+            .step-description {
+                font-size: 0.875rem;
+            }
+
+            /* Members Section */
+            .members-column {
+                padding: 1.25rem;
+            }
+
+            .column-header {
+                margin-bottom: 1.5rem;
+                padding-bottom: 0.875rem;
+            }
+
+            .column-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+
+            .column-title {
+                font-size: 1.125rem;
+            }
+
+            .profiles-scroll-container {
+                max-height: 400px;
+            }
+
+            .member-card {
+                padding: 1rem;
+            }
+
+            .member-avatar {
+                width: 44px;
+                height: 44px;
+                font-size: 1rem;
+                line-height: 44px;
+            }
+
+            .member-name {
+                font-size: 0.9375rem;
+            }
+
+            .member-role {
+                font-size: 0.8125rem;
+            }
+
+            .member-badge {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.6875rem;
+            }
+
+            .member-stat {
+                font-size: 0.75rem;
+            }
+
+            .skill-tag {
+                padding: 0.3125rem 0.625rem;
+                font-size: 0.6875rem;
+            }
+
+            .btn-connect {
+                padding: 0.625rem 1rem;
+                font-size: 0.875rem;
+            }
+
+            /* CTA Section */
+            .cta-section {
+                padding: 2.5rem 0;
+            }
+
+            .cta-title {
+                font-size: 1.5rem;
+            }
+
+            .cta-subtitle {
+                font-size: 0.9375rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .cta-buttons .btn {
+                padding: 0.875rem 2rem;
+                font-size: 1rem;
+                width: auto;
+                min-width: 250px;
+                max-width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+
+            /* Section Headers */
+            .section-title {
+                font-size: 1.625rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.9375rem;
+            }
+
+            .hero-badge {
+                font-size: 0.6875rem;
+            }
+
+            /* Loading & Empty States */
+            .loading-state {
+                padding: 1.5rem;
+                font-size: 0.9375rem;
+            }
+
+            .loading-state i {
+                font-size: 1.5rem !important;
+            }
+
+            .empty-state {
+                padding: 1.5rem;
+            }
+
+            /* General Button Styles */
+            .btn {
+                padding: 0.625rem 1.25rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        /* Extra Small Mobile (320px) */
+        @media (max-width: 360px) {
+            .hero-title {
+                font-size: 1.375rem;
+            }
+
+            .section-title {
+                font-size: 1.375rem;
+            }
+
+            .member-card {
+                padding: 0.875rem;
+            }
+
+            .profiles-scroll-container {
+                max-height: 350px;
+            }
+        }
+    </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Blujay Technologies",
+  "url": "https://www.blujaytech.com",
+  "telephone": "+91 96187 21797",
+  "email": "info@blujaytech.com",
+  "foundingDate": "2020",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Ameerpet",
+    "addressLocality": "Hyderabad",
+    "addressRegion": "Telangana",
+    "postalCode": "500038",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 17.4373949,
+    "longitude": 78.4439476
+  },
+  "sameAs": [
+    "https://linkedin.com/company/blujay-technologies",
+    "https://instagram.com/blujaytech",
+    "https://facebook.com/blujaytechnologies",
+    "https://youtube.com/@blujaytech"
+  ]
+}
+</script>
+    <link rel="stylesheet" href="../css/responsive-global.css">
+</head>
+<body>
+<div style="background:#1a56db;color:#fff;text-align:center;padding:10px 16px;font-size:14px;font-weight:500;position:relative;z-index:1000;">
+    New Batch Starts April 2026 - Limited Seats.
+  <a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20enroll%20in%20the%20new%20batch" 
+     target="_blank" rel="noopener noreferrer"
+     style="color:#fcd34d;text-decoration:underline;margin-left:8px;">
+    Enroll Now
+  </a>
+</div>
+    
+    <!-- Professional Navigation Header -->
+    
+    <link rel="canonical" href="https://www.blujaytech.com/community\index.html">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">
+                <img fetchpriority="high" height="400" width="600" src="../images/logo.webp" alt="Blujay Technologies" class="nav-logo">
+                <span>Blujay Network</span>
+            </a>
+            <a href="../index.html" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i>
+                Back to Main Site
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container" style="text-align: center;">
+            
+            <div class="hero-badge">
+                <i class="fas fa-users"></i>
+                Verified Expert Support Network
+            </div>
+            
+            <h1 class="text-[28px] sm:text-[36px] lg:text-[58px] leading-[1.1] lg:leading-[1.12] font-extrabold text-gray-900 mb-4 lg:mb-6">Best IT Training Institute in Hyderabad | Python, Java, AWS DevOps Courses</h1>
+            
+            <p class="hero-subtitle">
+                Get the job support you need "� or guide others using your industry experience.
+            </p>
+            
+            <!-- Trust Indicators -->
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <div class="trust-icon success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div style="text-align: left;">
+                        <div style="font-size: 0.9375rem; font-weight: 600;">Verified</div>
+                        <div style="font-size: 0.8125rem; color: var(--gray-600);">All Profiles</div>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon primary">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div style="text-align: left;">
+                        <div style="font-size: 0.9375rem; font-weight: 600;">Secure</div>
+                        <div style="font-size: 0.8125rem; color: var(--gray-600);">Private Data</div>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon warning">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div style="text-align: left;">
+                        <div style="font-size: 0.9375rem; font-weight: 600;">4.8/5</div>
+                        <div style="font-size: 0.8125rem; color: var(--gray-600);">User Rating</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Role Selection Cards -->
+            <div class="role-cards">
+                
+                <!-- Professional Helper Card -->
+                <div class="role-card">
+                    <div class="role-header">
+                        <div class="role-icon blue">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <div style="flex: 1; text-align: left;">
+                            <h3 class="role-title">Professional Helper</h3>
+                            <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0;">Industry Expert</p>
+                        </div>
+                    </div>
+                    <p class="role-description">
+                        Share your expertise, guide job support seekers, and make an impact while earning. Help others succeed in their career journey.
+                    </p>
+                    <div class="role-benefits">
+                        <span class="benefit-badge blue">
+                            <i class="fas fa-dollar-sign"></i>
+                            Earn Money
+                        </span>
+                        <span class="benefit-badge blue">
+                            <i class="fas fa-clock"></i>
+                            Flexible Hours
+                        </span>
+                        <span class="benefit-badge blue">
+                            <i class="fas fa-star"></i>
+                            Build Reputation
+                        </span>
+                    </div>
+                    <button onclick="handleRoleSelection('giver')" class="btn btn-primary" style="border: none; cursor: pointer;">
+                        <i class="fas fa-user-plus"></i>
+                        Join as Helper
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Job Support Seeker Card -->
+                <div class="role-card">
+                    <div class="role-header">
+                        <div class="role-icon green">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div style="flex: 1; text-align: left;">
+                            <h3 class="role-title">Job Support Seeker</h3>
+                            <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0;">Aspiring Professional</p>
+                        </div>
+                    </div>
+                    <p class="role-description">
+                        Get expert guidance, real-world support, and personalized mentorship to accelerate your career growth confidently.
+                    </p>
+                    <div class="role-benefits">
+                        <span class="benefit-badge green">
+                            <i class="fas fa-graduation-cap"></i>
+                            Expert Guidance
+                        </span>
+                        <span class="benefit-badge purple">
+                            <i class="fas fa-puzzle-piece"></i>
+                            Problem Solving
+                        </span>
+                        <span class="benefit-badge green">
+                            <i class="fas fa-rocket"></i>
+                            Career Growth
+                        </span>
+                    </div>
+                    <button onclick="handleRoleSelection('receiver')" class="btn btn-primary btn-success" style="border: none; cursor: pointer;">
+                        <i class="fas fa-user-plus"></i>
+                        Join as Job Support Seeker
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Trusted by Professionals Worldwide</h2>
+                <p class="section-subtitle">
+                    Join thousands of professionals who are already part of our community
+                </p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card blue">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Active Members</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Connections Made</div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Members Section -->
+    <section class="members-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="hero-badge" style="margin-bottom: 1rem;">Our Community</div>
+                <h2 class="section-title">Meet Our Experts & Learners</h2>
+                <p class="section-subtitle">
+                    Connect with verified professionals and aspiring talent in our community
+                </p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search" style="color: var(--gray-400); margin-left: 0.5rem; align-self: center;"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="Search by skills (e.g., AWS, JavaScript, Python, DevOps...)"
+                        onkeypress="if(event.key==='Enter') searchProfiles()"
+                    >
+                    <button class="search-btn" onclick="searchProfiles()">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </button>
+                </div>
+                
+                <!-- Filter Chips -->
+                <div class="filter-chips">
+                    <div class="filter-chip active" onclick="filterByType('all')">All Profiles</div>
+                    <div class="filter-chip" onclick="filterByType('GIVER')">Helpers Only</div>
+                    <div class="filter-chip" onclick="filterByType('RECEIVER')">Job Support Seekers Only</div>
+                    <div class="filter-chip" onclick="clearSearch()">
+                        <i class="fas fa-redo"></i> Reset
+                    </div>
+                </div>
+            </div>
+
+            <div class="members-container" id="membersContainer">
+                
+                <!-- Support Givers Column -->
+                <div class="members-column givers">
+                    <div class="column-header">
+                        <div class="column-icon blue">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <div>
+                            <h3 class="column-title">Professional Helpers</h3>
+                            <p style="font-size: 0.875rem; color: var(--gray-600); margin: 0;">
+                                <span id="giversCount">0</span> Industry Experts Ready to Help
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="profiles-scroll-container" id="giversContainer">
+                        <div class="loading-state">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 2rem;"></i>
+                            <p>Loading profiles...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job Support Seekers Column -->
+                <div class="members-column seekers">
+                    <div class="column-header">
+                        <div class="column-icon green">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div>
+                            <h3 class="column-title">Job Support Seekers</h3>
+                            <p style="font-size: 0.875rem; color: var(--gray-600); margin: 0;">
+                                <span id="seekersCount">0</span> Aspiring Professionals Looking for Guidance
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="profiles-scroll-container" id="seekersContainer">
+                        <div class="loading-state">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 2rem;"></i>
+                            <p>Loading profiles...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="hero-badge" style="margin-bottom: 1rem;">Why Choose Us</div>
+                <h2 class="section-title">Built for Modern Professionals</h2>
+                <p class="section-subtitle">
+                    Everything you need to connect, collaborate, and grow your career
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon green">
+                        <i class="fas fa-shield-check"></i>
+                    </div>
+                    <h4 class="feature-title">Verified Profiles</h4>
+                    <p class="feature-description">
+                        Every member is verified by our admin team to ensure authenticity and security for all users.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon blue">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h4 class="feature-title">Quality Connections</h4>
+                    <p class="feature-description">
+                        Connect with genuine professionals who are committed to helping you achieve your career goals.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon info">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h4 class="feature-title">Private & Secure</h4>
+                    <p class="feature-description">
+                        Your personal information is protected with enterprise-grade security and encryption.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Get started in three simple steps</p>
+            </div>
+
+            <div class="steps-grid">
+                <!-- Step 1 -->
+                <div class="step-item">
+                    <div class="step-number blue">1</div>
+                    <h4 class="step-title">Sign Up</h4>
+                    <p class="step-description">
+                        Create your profile as either a Helper or Job Support Seeker. Tell us about your skills and goals.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-item">
+                    <div class="step-number green">2</div>
+                    <h4 class="step-title">Get Verified</h4>
+                    <p class="step-description">
+                        Our team verifies your profile to maintain quality and trust within the community.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-item">
+                    <div class="step-number info">3</div>
+                    <h4 class="step-title">Start Connecting</h4>
+                    <p class="step-description">
+                        Browse profiles, send connection requests, and start your journey to success.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Get Started?</h2>
+            <p class="cta-subtitle">
+                Join our community today and take the next step in your professional journey
+            </p>
+            <div class="cta-buttons">
+                <button onclick="handleRoleSelection('giver')" class="btn btn-white" style="border: 2px solid white; cursor: pointer;">
+                    <i class="fas fa-hands-helping"></i>
+                    Join as Helper
+                </button>
+                <button onclick="handleRoleSelection('receiver')" class="btn btn-outline" style="cursor: pointer;">
+                    <i class="fas fa-user-graduate"></i>
+                    Join as Job Support Seeker
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <img loading="lazy" height="400" width="600" src="../images/logo.webp" alt="Blujay Technologies">
+                <span>Blujay Network</span>
+            </div>
+            <p class="footer-text">
+                &copy; 2026 Blujay Technologies. All rights reserved.
+            </p>
+            <p class="footer-tagline">
+                Empowering careers through meaningful connections
+            </p>
+        </div>
+    </footer>
+
+    <!-- Firebase & Role Selection Script -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyCiedANEie5u-2XQOjdsUFgdkE7s08gArY",
+            authDomain: "blujay-tech.firebaseapp.com",
+            projectId: "blujay-tech",
+            storageBucket: "blujay-tech.firebasestorage.app",
+            messagingSenderId: "586422050005",
+            appId: "1:586422050005:web:737ba2502d1b283ea6165c",
+            measurementId: "G-1JE665W8D0"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        
+        console.log('✅ Community Portal - Firebase initialized');
+        
+        let currentUser = null;
+        
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            if (user) {
+                console.log('✅ User logged in:', user.email);
+            } else {
+                console.log('ℹ️ No user logged in');
+            }
+        });
+        
+        // ============================================
+        // DYNAMIC PROFILE LOADING
+        // ============================================
+        
+        const API_URL = window.API_CONFIG?.getApiUrl() || 
+            (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? 'http://localhost:5000/api' 
+                : 'https://blujay-backend.onrender.com/api');
+        
+        let allProfiles = { givers: [], receivers: [] };
+        let currentFilter = 'all';
+        
+        // Load profiles on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadProfiles();
+        });
+        
+        // Load all verified profiles from backend
+        async function loadProfiles(searchKeyword = '') {
+            try {
+                console.log('📡 Loading profiles from API...');
+                
+                // Fetch GIVER profiles
+                const giversResponse = await fetch(`${API_URL}/community/public-profiles?type=GIVER&limit=50`);
+                const giversData = await giversResponse.json();
+                
+                // Fetch RECEIVER profiles  
+                const receiversResponse = await fetch(`${API_URL}/community/public-profiles?type=RECEIVER&limit=50`);
+                const receiversData = await receiversResponse.json();
+                
+                if (giversData.success) {
+                    allProfiles.givers = giversData.profiles || [];
+                }
+                
+                if (receiversData.success) {
+                    allProfiles.receivers = receiversData.profiles || [];
+                }
+                
+                console.log(`✅ Loaded ${allProfiles.givers.length} helpers, ${allProfiles.receivers.length} seekers`);
+                
+                // Apply search filter if provided
+                if (searchKeyword) {
+                    filterProfilesBySkill(searchKeyword);
+                } else {
+                    displayProfiles(allProfiles.givers, allProfiles.receivers);
+                }
+                
+            } catch (error) {
+                console.error('❌ Error loading profiles:', error);
+                showError();
+            }
+        }
+        
+        // Display profiles in the UI
+        function displayProfiles(givers, receivers) {
+            displayGiverProfiles(givers);
+            displayReceiverProfiles(receivers);
+            updateCounts(givers.length, receivers.length);
+        }
+        
+        // Display giver profiles
+        function displayGiverProfiles(profiles) {
+            const container = document.getElementById('giversContainer');
+            
+            if (!profiles || profiles.length === 0) {
+                container.innerHTML = `
+                    <div class="no-profiles">
+                        <i class="fas fa-user-slash"></i>
+                        <p>No helpers found</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = profiles.map(profile => createProfileCard(profile, 'giver')).join('');
+        }
+        
+        // Display receiver profiles
+        function displayReceiverProfiles(profiles) {
+            const container = document.getElementById('seekersContainer');
+            
+            if (!profiles || profiles.length === 0) {
+                container.innerHTML = `
+                    <div class="no-profiles">
+                        <i class="fas fa-user-slash"></i>
+                        <p>No job support seekers found</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = profiles.map(profile => createProfileCard(profile, 'receiver')).join('');
+        }
+        
+        // Create profile card HTML
+        function createProfileCard(profile, type) {
+            const initials = getInitials(profile.fullName || 'User');
+            const avatarClass = type === 'giver' ? '' : 'green';
+            const skills = profile.skills || [];
+            const displaySkills = skills.slice(0, 4);
+            
+            return `
+                <div class="member-card">
+                    <div class="member-header">
+                        <div class="member-avatar ${avatarClass}">${initials}</div>
+                        <div class="member-info">
+                            <div class="member-name">${escapeHtml(profile.fullName || 'Anonymous')}</div>
+                            <div class="member-role">${escapeHtml(profile.currentRole || profile.desiredRole || 'Professional')}</div>
+                        </div>
+                        <span class="member-badge verified">
+                            <i class="fas fa-check-circle"></i>
+                            Verified
+                        </span>
+                    </div>
+                    ${type === 'giver' ? `
+                    <div class="member-details">
+                        <div class="member-stat">
+                            <i class="fas fa-briefcase"></i>
+                            <span>${profile.experienceYears || 0}+ Years Experience</span>
+                        </div>
+                    </div>
+                    ` : `
+                    <div class="member-details">
+                        <div class="member-stat">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>${escapeHtml(profile.experienceLevel || 'Graduate')}</span>
+                        </div>
+                    </div>
+                    `}
+                    <div class="member-skills">
+                        ${displaySkills.map(skill => `<span class="skill-tag">${escapeHtml(skill)}</span>`).join('')}
+                    </div>
+                    <div class="member-footer">
+                        <div class="member-info-label" style="color: var(--gray-600); font-size: 0.875rem;">
+                            <i class="fas fa-map-marker-alt"></i> ${escapeHtml(profile.location || 'Location')}
+                        </div>
+                        <a href="#" class="btn btn-connect" onclick="showToast('Please login to view full profiles', 'info', 3000); return false;">
+                            View Profile
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Get initials from name
+        function getInitials(name) {
+            return name.split(' ')
+                .map(word => word[0])
+                .join('')
+                .toUpperCase()
+                .slice(0, 2);
+        }
+        
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Update profile counts
+        function updateCounts(giversCount, seekersCount) {
+            document.getElementById('giversCount').textContent = giversCount;
+            document.getElementById('seekersCount').textContent = seekersCount;
+        }
+        
+        // Search profiles by keyword
+        window.searchProfiles = function() {
+            const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+            
+            if (!keyword) {
+                displayProfiles(allProfiles.givers, allProfiles.receivers);
+                return;
+            }
+            
+            console.log('🔍 Searching for:', keyword);
+            filterProfilesBySkill(keyword);
+        };
+        
+        // Filter profiles by skill keyword
+        function filterProfilesBySkill(keyword) {
+            const lowerKeyword = keyword.toLowerCase();
+            
+            const filteredGivers = allProfiles.givers.filter(profile => {
+                const skills = profile.skills || [];
+                return skills.some(skill => skill.toLowerCase().includes(lowerKeyword)) ||
+                       (profile.currentRole && profile.currentRole.toLowerCase().includes(lowerKeyword)) ||
+                       (profile.fullName && profile.fullName.toLowerCase().includes(lowerKeyword));
+            });
+            
+            const filteredReceivers = allProfiles.receivers.filter(profile => {
+                const skills = profile.skills || [];
+                return skills.some(skill => skill.toLowerCase().includes(lowerKeyword)) ||
+                       (profile.desiredRole && profile.desiredRole.toLowerCase().includes(lowerKeyword)) ||
+                       (profile.fullName && profile.fullName.toLowerCase().includes(lowerKeyword));
+            });
+            
+            displayProfiles(filteredGivers, filteredReceivers);
+        }
+        
+        // Filter by profile type
+        window.filterByType = function(type) {
+            currentFilter = type;
+            
+            // Update active filter chip
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            const keyword = document.getElementById('searchInput').value.trim();
+            
+            if (type === 'all') {
+                if (keyword) {
+                    filterProfilesBySkill(keyword);
+                } else {
+                    displayProfiles(allProfiles.givers, allProfiles.receivers);
+                }
+            } else if (type === 'GIVER') {
+                const filtered = keyword ? 
+                    allProfiles.givers.filter(p => JSON.stringify(p.skills).toLowerCase().includes(keyword.toLowerCase())) :
+                    allProfiles.givers;
+                displayProfiles(filtered, []);
+            } else if (type === 'RECEIVER') {
+                const filtered = keyword ?
+                    allProfiles.receivers.filter(p => JSON.stringify(p.skills).toLowerCase().includes(keyword.toLowerCase())) :
+                    allProfiles.receivers;
+                displayProfiles([], filtered);
+            }
+        };
+        
+        // Clear search and reset filters
+        window.clearSearch = function() {
+            document.getElementById('searchInput').value = '';
+            currentFilter = 'all';
+            
+            // Reset active chip
+            document.querySelectorAll('.filter-chip').forEach((chip, index) => {
+                chip.classList.remove('active');
+                if (index === 0) chip.classList.add('active');
+            });
+            
+            displayProfiles(allProfiles.givers, allProfiles.receivers);
+        };
+        
+        // Show error state
+        function showError() {
+            const errorHtml = `
+                <div class="no-profiles">
+                    <i class="fas fa-exclamation-circle" style="color: var(--warning);"></i>
+                    <p>Unable to load profiles</p>
+                    <p style="font-size: 0.875rem; color: var(--gray-500);">Please check your connection</p>
+                </div>
+            `;
+            document.getElementById('giversContainer').innerHTML = errorHtml;
+            document.getElementById('seekersContainer').innerHTML = errorHtml;
+        }
+        
+        // Handle role selection - redirect to login with role context
+        window.handleRoleSelection = function(role) {
+            console.log('🎯 Role selected:', role);
+            
+            // Store community context for login page
+            sessionStorage.setItem('loginContext', 'community');
+            sessionStorage.setItem('requestedProfile', role === 'giver' ? 'GIVER' : 'RECEIVER');
+            
+            console.log('💾 Stored in sessionStorage:');
+            console.log('   "� loginContext: community');
+            console.log('   "� requestedProfile:', role === 'giver' ? 'GIVER' : 'RECEIVER');
+            
+            // Redirect to login page
+            console.log('🔄 Redirecting to login page...');
+            window.location.href = '../login.html';
+        };
+    </script>
+
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.2);text-decoration:none;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses%20in%20Hyderabad"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat with us on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,0.25);text-decoration:none;transition:transform 0.2s ease;"
+   onmouseover="this.style.transform='scale(1.1)'"
+   onmouseout="this.style.transform='scale(1)'">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

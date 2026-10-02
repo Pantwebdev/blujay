@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://www.blujaytech.com/course-detail.html">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details - Blujay Technologies</title>
+    <link rel="icon" href="images/logo.webp" type="image/x-icon">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    
+    <style>
+        * { 
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body { 
+            background: #f9fafb;
+            min-height: 100vh;
+        }
+        
+        /* ===== BLUJAY BRAND COLORS ===== */
+        :root {
+            --blujay-primary: #1D5D7F;
+            --blujay-primary-hover: #236192;
+            --blujay-light: #E8F4F8;
+            --blujay-dark: #164257;
+        }
+        
+        .bg-blue-600 { background-color: var(--blujay-primary) !important; }
+        .hover\:bg-blue-700:hover { background-color: var(--blujay-primary-hover) !important; }
+        .text-blue-600 { color: var(--blujay-primary) !important; }
+        .border-blue-500 { border-color: var(--blujay-primary) !important; }
+        .bg-blue-100 { background-color: var(--blujay-light) !important; }
+        
+        /* ===== HEADER ===== */
+        header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            backdrop-filter: blur(10px);
+        }
+        
+        header a {
+            transition: all 0.3s ease;
+        }
+        
+        /* ===== HERO SECTION - BLUJAY GRADIENT ===== */
+        .hero-section {
+            background: linear-gradient(135deg, #1D5D7F 0%, #236192 50%, #2a7bb8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".1" fill="%23ffffff"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.1;
+        }
+        
+        /* ===== STICKY BUY BOX ===== */
+        .sticky-buy-box {
+            position: sticky;
+            top: 90px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .sticky-buy-box:hover {
+            box-shadow: 0 8px 30px rgba(29, 93, 127, 0.15);
+            border-color: var(--blujay-primary);
+        }
+        
+        /* ===== BEAUTIFUL FREE STAMP ===== */
+        .free-stamp {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5), inset 0 -2px 10px rgba(0, 0, 0, 0.2);
+            transform: rotate(-15deg);
+            border: 4px dashed rgba(255, 255, 255, 0.9);
+            z-index: 10;
+            animation: stampPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes stampPulse {
+            0%, 100% { transform: rotate(-15deg) scale(1); }
+            50% { transform: rotate(-15deg) scale(1.05); }
+        }
+        
+        .free-stamp-inner {
+            text-align: center;
+            color: white;
+        }
+        
+        .free-stamp-text {
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1;
+        }
+        
+        .free-stamp-icon {
+            font-size: 14px;
+            margin-top: 2px;
+            opacity: 0.9;
+        }
+        
+        /* Price display for FREE courses */
+        .price-free-container {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid #10b981;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .price-free-text {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .price-original-worth {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        /* ===== CLEAN CARDS ===== */
+        .content-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            border: 1px solid #f3f4f6;
+        }
+        
+        .content-card:hover {
+            box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+            border-color: #e5e7eb;
+        }
+        
+        /* ===== MODULE HEADER ===== */
+        .module-header {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 18px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .module-header:hover {
+            background: var(--blujay-light);
+            border-color: var(--blujay-primary);
+        }
+        
+        .module-header i {
+            transition: transform 0.3s ease;
+        }
+        
+        /* ===== VIDEO ITEM ===== */
+        .video-item {
+            padding: 14px 18px;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 6px 0;
+        }
+        
+        .video-item:hover {
+            background: #f0f9ff;
+            border-left-color: var(--blujay-primary);
+            transform: translateX(8px);
+        }
+        
+        .video-item.free {
+            background: #f0fdf4;
+            border-left-color: #10b981;
+        }
+        
+        .video-item.free:hover {
+            background: #dcfce7;
+        }
+        
+        /* ===== ENROLL BUTTON ===== */
+        .btn-enroll {
+            background: linear-gradient(135deg, var(--blujay-primary) 0%, var(--blujay-primary-hover) 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(29, 93, 127, 0.3);
+        }
+        
+        .btn-enroll:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(29, 93, 127, 0.4);
+        }
+        
+        .btn-enroll:active {
+            transform: translateY(-1px);
+        }
+        
+        /* ===== DISCOUNT BADGE ===== */
+        .discount-badge {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+        
+        /* ===== LEARNING BENEFITS ===== */
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-item:hover {
+            background: var(--blujay-light);
+            transform: translateX(5px);
+        }
+        
+        .benefit-icon {
+            width: 24px;
+            height: 24px;
+            background: #10b981;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .sticky-buy-box {
+                position: relative;
+                top: 0;
+                margin-bottom: 24px;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .hero-section {
+                padding: 2rem 0;
+            }
+            
+            .content-card {
+                border-radius: 12px;
+            }
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* ===== COURSE THUMBNAIL HOVER ===== */
+        .course-thumbnail-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        
+        .course-thumbnail-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.3));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .course-thumbnail-container:hover::after {
+            opacity: 1;
+        }
+    </style>
+    <link rel="stylesheet" href="css/responsive-global.css">
+</head>
+<body>
+    
+    <!-- Header -->
+    
+    <link rel="canonical" href="https://www.blujaytech.com/course-detail.html">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- ? SMART BACK BUTTON -->
+                <a id="back-btn" href="all-courses.html" class="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-semibold transition-all hover:gap-3">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="hidden sm:inline">Back to Courses</span>
+                </a>
+                <a href="index.html">
+                    <img fetchpriority="high" height="400" width="600" src="logo.png" alt="Blujay" class="h-10" id="site-logo">
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Loading State -->
+    <div id="loading-state" class="max-w-7xl mx-auto px-4 py-12 text-center">
+        <i class="fas fa-spinner fa-spin text-5xl text-blue-600 mb-4"></i>
+        <p class="text-gray-600 font-medium">Loading course details...</p>
+    </div>
+    
+    <!-- Main Content -->
+    <div id="main-content" class="hidden">
+        <!-- Hero Section -->
+        <div class="hero-section text-white py-12 lg:py-16">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
+                <div class="max-w-3xl">
+                    <h1 id="course-title" class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">Course Title</h1>
+                    <p id="course-description" class="text-lg sm:text-xl text-blue-100 mb-6 leading-relaxed">Course description...</p>
+                    
+                    <div class="flex flex-wrap items-center gap-4 sm:gap-6 mb-6">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <span class="font-bold text-xl" id="course-rating">0.0</span>
+                            <span class="text-blue-100" id="course-students">(0 students)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="far fa-clock text-blue-100"></i>
+                            <span id="course-duration">Self-paced</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-signal text-blue-100"></i>
+                            <span id="course-level">Beginner</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 w-fit">
+                        <i class="fas fa-user-circle text-3xl"></i>
+                        <div>
+                            <p class="text-sm text-blue-100">Created by</p>
+                            <p class="font-semibold text-lg" id="course-instructor">Instructor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Content Grid -->
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-8 lg:py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+                
+                <!-- Left Column -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- What You'll Learn -->
+                    <div class="content-card p-6 lg:p-8">
+                        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">What you'll learn</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">Build full-stack applications</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">Master modern frameworks</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">Deploy to production</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">Work with databases</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Course Content -->
+                    <div class="content-card p-6 lg:p-8">
+                        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Course Content</h2>
+                        <p class="text-gray-600 mb-6 flex items-center gap-2">
+                            <i class="fas fa-list-ul text-blue-600"></i>
+                            <span id="total-modules">0</span> sections • 
+                            <span id="total-videos">0</span> lectures
+                        </p>
+                        
+                        <div id="curriculum-container" class="space-y-3">
+                            <!-- Modules loaded here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Requirements -->
+                    <div class="content-card p-6 lg:p-8">
+                        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">Requirements</h2>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-circle text-xs text-blue-600 mt-2"></i>
+                                <span class="text-gray-700">Basic HTML, CSS, and JavaScript knowledge</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-circle text-xs text-blue-600 mt-2"></i>
+                                <span class="text-gray-700">A computer with internet connection</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-circle text-xs text-blue-600 mt-2"></i>
+                                <span class="text-gray-700">Willingness to learn and practice</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Description -->
+                    <div class="content-card p-6 lg:p-8">
+                        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">Description</h2>
+                        <div id="course-description-full" class="text-gray-700 leading-relaxed text-base">
+                            <!-- Full description -->
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <!-- Right Column - Buy Box -->
+                <div class="lg:col-span-1">
+                    <div class="sticky-buy-box p-6">
+                        <div class="course-thumbnail-container mb-6 relative rounded-lg overflow-hidden">
+                            <img loading="lazy" height="400" width="600" id="course-thumbnail" src="https://via.placeholder.com/400x225" alt="Course" class="w-full">
+                            <!-- FREE Stamp Badge -->
+                            <div id="free-stamp" class="free-stamp hidden">
+                                <div class="free-stamp-inner">
+                                    <div class="free-stamp-text">FREE</div>
+                                    <div class="free-stamp-icon">? ? ?</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pricing Section -->
+                        <div class="mb-6" id="pricing-section">
+                            <div class="flex items-baseline gap-2 mb-2">
+                                <span class="text-4xl font-bold text-gray-900" id="discount-price">?999</span>
+                                <span class="text-xl text-gray-400 line-through" id="original-price">?4,999</span>
+                            </div>
+                            <span id="discount-badge" class="discount-badge inline-block px-3 py-1.5 bg-red-500 text-white text-sm font-bold rounded-lg shadow-md">
+                                80% OFF
+                            </span>
+                        </div>
+                        
+                        <!-- ? ENROLL BUTTON -->
+                        <button id="enroll-btn" class="btn-enroll w-full text-white py-4 rounded-xl font-bold text-lg mb-6 flex items-center justify-center gap-2">
+                            <i class="fas fa-shopping-cart"></i>
+                            Enroll Now
+                        </button>
+                        
+                        <div class="border-t border-gray-200 pt-5 space-y-4 text-sm">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-infinity text-blue-600 text-lg"></i>
+                                <span class="text-gray-700 font-medium">Lifetime access</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-mobile-alt text-blue-600 text-lg"></i>
+                                <span class="text-gray-700 font-medium">Access on mobile and desktop</span>
+                            </div>
+                             
+                             
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <!-- ? FIREBASE + BACK BUTTON (NO auth VARIABLE) -->
+    <script>
+const firebaseConfig = {
+    apiKey: "AIzaSyCiedANEie5u-2XQOjdsUFgdkE7s08gArY",
+    authDomain: "blujay-tech.firebaseapp.com",
+    projectId: "blujay-tech",
+    storageBucket: "blujay-tech.firebasestorage.app",
+    messagingSenderId: "586422050005",
+    appId: "1:586422050005:web:737ba2502d1b283ea6165c",
+    measurementId: "G-1JE665W8D0"
+};
+
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+
+// ? UPDATE BACK BUTTON BASED ON LOGIN STATUS
+function updateBackButton() {
+    const backBtn = document.getElementById('back-btn');
+    const authToken = localStorage.getItem('authToken');
+    
+    if (authToken) {
+        backBtn.href = 'dashboard.html';
+        backBtn.innerHTML = '<i class="fas fa-arrow-left"></i><span class="hidden sm:inline">Back to Dashboard</span>';
+        console.log('? Logged in ? Back button goes to dashboard.html');
+    } else {
+        backBtn.href = 'courses.html';
+        backBtn.innerHTML = '<i class="fas fa-arrow-left"></i><span class="hidden sm:inline">Back to Courses</span>';
+        console.log('Not logged in ? Back button goes to courses.html');
+    }
+}
+
+updateBackButton();
+
+firebase.auth().onAuthStateChanged((user) => {
+    updateBackButton();
+});
+</script>
+
+<!-- ===== ENROLLMENT CALLBACK MODAL ===== -->
+<div id="enrollmentCallbackModal" class="fixed inset-0 bg-black bg-opacity-60 z-[200] hidden items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-xl max-w-3xl w-full shadow-2xl transform transition-all scale-95 modal-content overflow-visible">
+        
+        <div class="flex flex-col lg:flex-row max-h-[85vh] overflow-visible">
+            <!-- Left Side - Branding Section (Desktop/Tablet) -->
+            <div class="hidden md:flex md:w-[45%] lg:w-[40%] bg-gradient-to-br from-[#0057A0] via-[#0057A0] to-[#00447C] text-white p-6 lg:p-8 flex-col justify-between relative overflow-hidden">
+                <!-- Background Pattern -->
+                <div class="absolute inset-0 opacity-10">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-white rounded-full -mr-24 -mt-24"></div>
+                    <div class="absolute bottom-0 left-0 w-32 h-32 bg-white rounded-full -ml-16 -mb-16"></div>
+                </div>
+                
+                <div class="relative z-10">
+                    <div class="w-14 h-14 lg:w-16 lg:h-16 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mb-4 backdrop-blur-sm">
+                        <i class="fas fa-graduation-cap text-[24px] lg:text-[28px]"></i>
+                    </div>
+                    <h2 class="text-[20px] lg:text-[24px] font-bold leading-tight mb-2">Enroll in this<br>course today!</h2>
+                    <h3 class="text-[18px] lg:text-[22px] font-semibold mb-3">We'll help you<br>get started.</h3>
+                    <p class="text-blue-100 text-[13px] leading-relaxed">Submit your details and we'll contact you soon!</p>
+                    
+                    <div class="mt-4">
+                        <p class="text-[12px] text-blue-50 leading-relaxed">
+                            Our team will review your enrollment request and grant you immediate access to the course materials.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="relative z-10 mt-4">
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3 border border-white border-opacity-20">
+                        <p class="text-[10px] font-semibold text-white text-opacity-70 mb-2 uppercase tracking-wider">Contact Information</p>
+                        <div class="space-y-1.5">
+                            <div class="flex items-center gap-2 text-[12px]">
+                                <i class="fas fa-phone text-white text-opacity-80 text-[11px]"></i>
+                                <span>+91 96187 21797</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-[12px]">
+                                <i class="fas fa-envelope text-white text-opacity-80 text-[11px]"></i>
+                                <span>info@blujaytech.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Form Section -->
+            <div class="w-full md:w-[55%] lg:w-[60%] relative bg-white max-h-[85vh] md:max-h-none overflow-visible">
+                <!-- Mobile Header -->
+                <div class="md:hidden bg-gradient-to-r from-[#0057A0] to-[#00447C] text-white p-5 relative">
+                    <button onclick="closeEnrollmentCallbackModal()" class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full hover:bg-white hover:bg-opacity-20 transition-all">
+                        <i class="fas fa-times text-[16px]"></i>
+                    </button>
+                    <div class="text-center pr-8">
+                        <div class="w-14 h-14 bg-white bg-opacity-20 rounded-xl mx-auto mb-2 flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-[20px]"></i>
+                        </div>
+                        <h3 class="text-[19px] font-bold mb-1">Enroll in Course</h3>
+                        <p class="text-[12px] text-white text-opacity-80">We'll grant you access within 24 hours</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Close Button -->
+                <button onclick="closeEnrollmentCallbackModal()" class="hidden md:flex absolute top-3 right-3 w-9 h-9 items-center justify-center rounded-full hover:bg-gray-100 transition-all z-20">
+                    <i class="fas fa-times text-[18px] text-gray-600"></i>
+                </button>
+
+                <!-- Form -->
+                <form id="contact-form" id="enrollmentCallbackForm" class="p-5 lg:p-6 space-y-3.5 lg:space-y-4 overflow-visible">
+                    <div class="hidden md:block mb-4 lg:mb-5">
+                        <h3 class="text-[20px] lg:text-[24px] font-bold text-gray-900 mb-1">Complete Your Enrollment</h3>
+                        <p class="text-[13px] lg:text-[14px] text-gray-600">Fill out the form to enroll in this course</p>
+                    </div>
+
+                    <!-- Hidden Course Fields -->
+                    <input type="hidden" id="enrollmentCourseId" name="courseId">
+                    <input type="hidden" id="enrollmentCourseName" name="courseName">
+
+                    <div>
+                        <label class="block text-[12px] lg:text-[13px] font-semibold text-gray-700 mb-1.5 lg:mb-2">Full Name *</label>
+                        <input type="text" id="enrollmentName" name="name" required 
+                            class="w-full px-3.5 lg:px-4 py-2 lg:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0057A0] focus:border-[#0057A0] outline-none text-[13px] lg:text-[14px] transition-all"
+                            placeholder="John Doe">
+                    </div>
+
+                    <div>
+                        <label class="block text-[12px] lg:text-[13px] font-semibold text-gray-700 mb-1.5 lg:mb-2">Email Address *</label>
+                        <input type="email" id="enrollmentEmail" name="email" required 
+                            class="w-full px-3.5 lg:px-4 py-2 lg:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0057A0] focus:border-[#0057A0] outline-none text-[13px] lg:text-[14px] transition-all"
+                            placeholder="john@example.com">
+                    </div>
+
+                    <div>
+                        <label class="block text-[12px] lg:text-[13px] font-semibold text-gray-700 mb-1.5 lg:mb-2">Phone Number *</label>
+                        <input type="tel" id="enrollmentPhone" name="phone" required 
+                            class="w-full px-3.5 lg:px-4 py-2 lg:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0057A0] focus:border-[#0057A0] outline-none text-[13px] lg:text-[14px] transition-all"
+                            placeholder="+91 XXXXX XXXXX">
+                    </div>
+
+                    <div>
+                        <label class="block text-[12px] lg:text-[13px] font-semibold text-gray-700 mb-1.5 lg:mb-2">Interested In *</label>
+                        <div class="service-dropdown-wrapper">
+                            <div class="service-dropdown-trigger" id="enrollmentServiceDropdownTrigger">
+                                <span class="placeholder" id="enrollmentServiceSelectedText">Select your interest...</span>
+                                <i class="fas fa-chevron-down chevron"></i>
+                            </div>
+                            <div class="service-dropdown-menu" id="enrollmentServiceDropdownMenu">
+                                <div class="service-dropdown-item" data-value="Profile Pushing">
+                                    <i class="fas fa-user-tie"></i>
+                                    <span>Profile Pushing</span>
+                                </div>
+                                <div class="service-dropdown-item" data-value="Job Support">
+                                    <i class="fas fa-hands-helping"></i>
+                                    <span>Job Support</span>
+                                </div>
+                                <div class="service-dropdown-item" data-value="Web Development Services">
+                                    <i class="fas fa-code"></i>
+                                    <span>Web Development Services</span>
+                                </div>
+                                <div class="service-dropdown-item" data-value="Online Courses">
+                                    <i class="fas fa-laptop"></i>
+                                    <span>Online Courses</span>
+                                </div>
+                                <div class="service-dropdown-item" data-value="Recorded Courses">
+                                    <i class="fas fa-video"></i>
+                                    <span>Recorded Courses</span>
+                                </div>
+                            </div>
+                            <select name="service" id="enrollmentServiceHiddenSelect" required style="position: absolute; opacity: 0; pointer-events: none; width: 1px; height: 1px;">
+                                <option value="" selected></option>
+                                <option value="Profile Pushing">Profile Pushing</option>
+                                <option value="Job Support">Job Support</option>
+                                <option value="Web Development Services">Web Development Services</option>
+                                <option value="Online Courses">Online Courses</option>
+                                <option value="Recorded Courses">Recorded Courses</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="enrollmentSubmitBtn"
+                        class="w-full bg-[#0057A0] text-white py-2.5 lg:py-3 rounded-lg font-semibold text-[14px] lg:text-[15px] hover:bg-[#00447C] transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 mt-4 lg:mt-5">
+                        <span>Submit Enrollment Request</span>
+                        <i class="fas fa-arrow-right text-[12px]"></i>
+                    </button>
+
+                    <!-- Success Message -->
+                    <div id="enrollmentSuccessMessage" class="hidden bg-green-50 border border-green-200 text-green-800 px-3 py-2.5 rounded-lg text-[12px] text-center">
+                        <i class="fas fa-check-circle mr-1"></i>
+                        <strong>Success!</strong> You're enrolled! Redirecting to your courses...
+                    </div>
+
+                    <!-- Error Message -->
+                    <div id="enrollmentErrorMessage" class="hidden bg-red-50 border border-red-200 text-red-800 px-3 py-2.5 rounded-lg text-[12px] text-center">
+                        <i class="fas fa-exclamation-circle mr-1"></i>
+                        <strong>Error!</strong> Please try again.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* ===== ENROLLMENT CALLBACK MODAL STYLES ===== */
+    #enrollmentCallbackModal {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #enrollmentCallbackModal.flex {
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    .modal-content {
+        animation: slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        max-height: 85vh;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(40px) scale(0.95);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+    }
+
+    /* Modal responsive adjustments */
+    @media (max-width: 767px) {
+        .modal-content {
+            max-width: 95%;
+            margin: 0 auto;
+            max-height: 90vh;
+        }
+
+        #enrollmentCallbackModal {
+            padding: 0.75rem;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .modal-content {
+            max-width: 800px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .modal-content {
+            max-width: 920px;
+        }
+    }
+
+    /* Service Custom Dropdown Styling (Matching Offerings Dropdown) */
+    .service-dropdown-wrapper {
+        position: relative;
+        width: 100%;
+    }
+
+    .service-dropdown-trigger {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 0.875rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
+        background: #ffffff;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        font-size: 13px;
+        font-weight: 500;
+        color: #111827;
+        user-select: none;
+    }
+
+    @media (min-width: 1024px) {
+        .service-dropdown-trigger {
+            padding: 0.625rem 1rem;
+            font-size: 14px;
+        }
+    }
+
+    .service-dropdown-trigger:hover {
+        border-color: #0057A0;
+        background-color: #f8fafc;
+    }
+
+    .service-dropdown-trigger.active {
+        border-color: #0057A0;
+        box-shadow: 0 0 0 3px rgba(0, 87, 160, 0.1);
+    }
+
+    .service-dropdown-trigger .placeholder {
+        color: #9ca3af;
+        font-style: italic;
+    }
+
+    .service-dropdown-trigger .selected-text {
+        color: #111827;
+        font-weight: 500;
+    }
+
+    .service-dropdown-trigger i.chevron {
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        font-size: 9px;
+        color: #0057A0;
+        margin-left: 8px;
+    }
+
+    .service-dropdown-trigger.active i.chevron {
+        transform: rotate(180deg);
+    }
+
+    .service-dropdown-menu {
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        border-radius: 14px;
+        box-shadow: 0 22px 60px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(15, 23, 42, 0.04);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 10000;
+        padding: 10px;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .service-dropdown-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .service-dropdown-menu::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .service-dropdown-menu::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 8px;
+    }
+
+    .service-dropdown-menu::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 8px;
+    }
+
+    .service-dropdown-menu::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+
+    .service-dropdown-item {
+        display: flex;
+        align-items: center;
+        padding: 11px 14px;
+        color: #111827;
+        font-size: 13px;
+        font-weight: 500;
+        transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 10px;
+        margin-bottom: 4px;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .service-dropdown-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .service-dropdown-item i {
+        margin-right: 10px;
+        font-size: 13px;
+        width: 18px;
+        text-align: center;
+        color: #0057A0;
+        opacity: 0.9;
+    }
+
+    .service-dropdown-item:hover {
+        background: #0057A0;
+        color: #ffffff;
+        padding-left: 18px;
+        transform: translateX(2px);
+    }
+
+    .service-dropdown-item:hover i {
+        color: #ffffff;
+    }
+
+    .service-dropdown-item.selected {
+        background: #eff6ff;
+        color: #0057A0;
+        font-weight: 600;
+    }
+
+    .service-dropdown-item.selected:hover {
+        background: #0057A0;
+        color: #ffffff;
+    }
+
+    /* Hidden native select for form submission */
+    .service-dropdown-wrapper select {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+        width: 1px;
+        height: 1px;
+    }
+
+    /* Loading state for submit button */
+    #enrollmentSubmitBtn.loading {
+        opacity: 0.7;
+        pointer-events: none;
+    }
+
+    /* Responsive adjustments for dropdown */
+    @media (max-width: 768px) {
+        .service-dropdown-menu {
+            bottom: auto;
+            top: calc(100% + 4px);
+        }
+    }
+</style>
+    
+    <!-- ? Load course-detail.js -->
+    <script src="js/course-detail.js"></script>
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.2);text-decoration:none;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses%20in%20Hyderabad"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat with us on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,0.25);text-decoration:none;transition:transform 0.2s ease;"
+   onmouseover="this.style.transform='scale(1.1)'"
+   onmouseout="this.style.transform='scale(1)'">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

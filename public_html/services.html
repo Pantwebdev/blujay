@@ -1,0 +1,2348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://www.blujaytech.com/services.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blujay Technologies - Professional Services & Plans">
+    <title>Services & Plans - Blujay Technologies</title>
+    <link rel="icon" href="images/logo.webp" type="image/x-icon">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ===== BLUJAY BRAND COLORS ===== */
+        :root {
+            --blujay-primary: #0057A0;
+            --blujay-primary-hover: #00447C;
+            --blujay-light: #E6F1FB;
+            --blujay-dark: #00345E;
+        }
+
+        /* Override Tailwind blue-600 with brand color */
+        .bg-blue-600 {
+            background-color: var(--blujay-primary) !important;
+        }
+
+        .hover\:bg-blue-700:hover {
+            background-color: var(--blujay-primary-hover) !important;
+        }
+
+        .text-blue-600 {
+            color: var(--blujay-primary) !important;
+        }
+
+        .hover\:text-blue-600:hover {
+            color: var(--blujay-primary) !important;
+        }
+
+        .border-blue-600 {
+            border-color: var(--blujay-primary) !important;
+        }
+
+        .bg-blue-50 {
+            background-color: var(--blujay-light) !important;
+        }
+
+        .hover\:bg-blue-50:hover {
+            background-color: #d4e6fa !important;
+        }
+
+        .from-blue-600 {
+            --tw-gradient-from: var(--blujay-primary) !important;
+        }
+
+        .to-blue-500 {
+            --tw-gradient-to: var(--blujay-primary-hover) !important;
+        }
+
+        /* ===== NAVBAR STYLES ===== */
+        .nav-glass {
+            backdrop-filter: blur(14px);
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .nav-glass.scrolled {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Desktop Dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .dropdown-toggle i.chevron {
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 9px;
+        }
+
+        .dropdown:hover .dropdown-toggle,
+        .dropdown.active .dropdown-toggle {
+            color: var(--blujay-primary) !important;
+        }
+
+        .dropdown:hover .dropdown-toggle i.chevron,
+        .dropdown.active .dropdown-toggle i.chevron {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            min-width: 240px;
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 22px 60px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(15, 23, 42, 0.04);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            padding: 10px;
+        }
+
+        /* Add padding to dropdown wrapper to bridge gap */
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 8px;
+        }
+
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: flex;
+            align-items: center;
+            padding: 11px 14px;
+            color: #111827;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 10px;
+            margin-bottom: 4px;
+            position: relative;
+        }
+
+        .dropdown-menu a:last-child {
+            margin-bottom: 0;
+        }
+
+        .dropdown-menu a i {
+            margin-right: 10px;
+            font-size: 13px;
+            width: 18px;
+            text-align: center;
+            color: var(--blujay-primary);
+            opacity: 0.9;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--blujay-primary);
+            color: #ffffff;
+            padding-left: 18px;
+            transform: translateX(2px);
+        }
+
+        .dropdown-menu a:hover i {
+            color: #ffffff;
+        }
+
+        /* Mobile Dropdowns */
+        .mobile-dropdown-wrapper {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0;
+        }
+
+        .mobile-dropdown-toggle {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 10px 0;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-dropdown-toggle i.arrow {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 9px;
+            color: #9ca3af;
+        }
+
+        .mobile-dropdown-toggle.active i.arrow {
+            transform: rotate(180deg);
+            color: var(--blujay-primary);
+        }
+
+        .mobile-dropdown-toggle.active {
+            color: var(--blujay-primary);
+            font-weight: 600;
+        }
+
+        .mobile-dropdown-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-dropdown-content.active {
+            grid-template-rows: 1fr;
+        }
+
+        .mobile-dropdown-inner {
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .mobile-dropdown-content.active .mobile-dropdown-inner {
+            padding: 8px 3px 10px 3px;
+        }
+
+        .mobile-dropdown-content a {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            color: #374151;
+            background: #ffffff;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            font-weight: 500;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-dropdown-content a:last-child {
+            margin-bottom: 0;
+        }
+
+        .mobile-dropdown-content a i {
+            margin-right: 9px;
+            font-size: 11px;
+            width: 14px;
+            text-align: center;
+            opacity: 0.8;
+            color: var(--blujay-primary);
+        }
+
+        .mobile-dropdown-content a:active {
+            background: var(--blujay-primary) !important;
+            color: #ffffff !important;
+            border-color: var(--blujay-primary) !important;
+            transform: scale(0.97);
+        }
+
+        .mobile-dropdown-content a:active i {
+            opacity: 1;
+            color: #ffffff;
+        }
+
+        #mobile-menu {
+            backdrop-filter: blur(10px);
+        }
+
+        body.mobile-menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+        }
+
+        /* ===== CALLBACK MODAL STYLES ===== */
+        #callbackModal {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #callbackModal.flex {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            animation: slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-height: 85vh;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(40px) scale(0.95);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Modal responsive adjustments */
+        @media (max-width: 767px) {
+            .modal-content {
+                max-width: 95%;
+                margin: 0 auto;
+                max-height: 90vh;
+            }
+
+            #callbackModal {
+                padding: 0.75rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .modal-content {
+                max-width: 800px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .modal-content {
+                max-width: 920px;
+            }
+        }
+
+        /* Service Custom Dropdown Styling */
+        .service-dropdown-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .service-dropdown-trigger {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0.875rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background: #ffffff;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 13px;
+            font-weight: 500;
+            color: #111827;
+            user-select: none;
+        }
+
+        @media (min-width: 1024px) {
+            .service-dropdown-trigger {
+                padding: 0.625rem 1rem;
+                font-size: 14px;
+            }
+        }
+
+        .service-dropdown-trigger:hover {
+            border-color: #0057A0;
+            background-color: #f8fafc;
+        }
+
+        .service-dropdown-trigger.active {
+            border-color: #0057A0;
+            box-shadow: 0 0 0 3px rgba(0, 87, 160, 0.1);
+        }
+
+        .service-dropdown-trigger .placeholder {
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        .service-dropdown-trigger .selected-text {
+            color: #111827;
+            font-weight: 500;
+        }
+
+        .service-dropdown-trigger i.chevron {
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 9px;
+            color: #0057A0;
+            margin-left: 8px;
+        }
+
+        .service-dropdown-trigger.active i.chevron {
+            transform: rotate(180deg);
+        }
+
+        .service-dropdown-menu {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 22px 60px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(15, 23, 42, 0.04);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10000;
+            padding: 10px;
+            max-height: none;
+            overflow: visible;
+        }
+
+        .service-dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .service-dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 11px 14px;
+            color: #111827;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 10px;
+            margin-bottom: 4px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .service-dropdown-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .service-dropdown-item i {
+            margin-right: 10px;
+            font-size: 13px;
+            width: 18px;
+            text-align: center;
+            color: #0057A0;
+            opacity: 0.9;
+        }
+
+        .service-dropdown-item:hover {
+            background: #0057A0;
+            color: #ffffff;
+            padding-left: 18px;
+            transform: translateX(2px);
+        }
+
+        .service-dropdown-item:hover i {
+            color: #ffffff;
+        }
+
+        .service-dropdown-item.selected {
+            background: #eff6ff;
+            color: #0057A0;
+            font-weight: 600;
+        }
+
+        .service-dropdown-item.selected:hover {
+            background: #0057A0;
+            color: #ffffff;
+        }
+
+        /* Button loading state */
+        #submitBtn.loading {
+            pointer-events: none;
+            opacity: 0.75;
+        }
+
+        #submitBtn.loading span::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border: 2px solid #ffffff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            animation: spin 0.7s linear infinite;
+            margin-left: 6px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Pulse Animation */
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .pulse-animation {
+            animation: pulse 2.5s ease-in-out infinite;
+        }
+
+        /* MOBILE CENTER - FOOTER CONTACT */
+        @media (max-width: 1023px) {
+            .footer-contact-section {
+                text-align: center !important;
+                grid-column: 1 / -1 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+
+            .footer-contact-section h4 {
+                text-align: center !important;
+            }
+
+            .footer-contact-section ul {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                list-style: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+            }
+
+            .footer-contact-section ul li {
+                width: 100% !important;
+                text-align: center !important;
+                display: flex !important;
+                justify-content: center !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .footer-contact-section ul li a {
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                width: 100% !important;
+            }
+
+            .footer-contact-social {
+                display: flex !important;
+                justify-content: center !important;
+                gap: 0.5rem !important;
+                width: 100% !important;
+            }
+        }
+
+        /* DESKTOP VIEW - KEEP FOOTER CONTACT LEFT ALIGNED */
+        @media (min-width: 1024px) {
+            .footer-contact-section {
+                text-align: left !important;
+            }
+
+            .footer-contact-section h4 {
+                text-align: left !important;
+            }
+
+            .footer-contact-section ul {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+            }
+
+            .footer-contact-section ul li {
+                text-align: left !important;
+                justify-content: flex-start !important;
+            }
+
+            .footer-contact-section ul li a {
+                justify-content: flex-start !important;
+            }
+
+            .footer-contact-social {
+                justify-content: flex-start !important;
+            }
+        }
+
+        /* SERVICE CARD HOVER EFFECTS */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(29, 93, 127, 0.15);
+        }
+
+        .service-card-icon {
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover .service-card-icon {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #1D5D7F 0%, #236192 100%);
+        }
+
+        .service-card:hover .service-card-icon i {
+            color: #ffffff;
+        }
+
+        /* PRICING CARD ANIMATIONS */
+        .pricing-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #1D5D7F, transparent);
+            transition: left 0.6s ease;
+        }
+
+        .pricing-card:hover::before {
+            left: 100%;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 24px 48px rgba(29, 93, 127, 0.2);
+        }
+
+        .pricing-featured {
+            border: 2px solid #1D5D7F;
+            background: linear-gradient(135deg, #E8F4F8 0%, #ffffff 100%);
+        }
+
+        /* BENEFIT CARD EFFECTS */
+        .benefit-card {
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(29, 93, 127, 0.12);
+        }
+
+        .benefit-card:hover .benefit-icon-wrapper {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        .benefit-icon-wrapper {
+            transition: all 0.3s ease;
+        }
+
+        /* SMOOTH SCROLLING */
+        @media (prefers-reduced-motion: no-preference) {
+            * {
+                scroll-behavior: smooth;
+            }
+        }
+
+        /* RESPONSIVE UTILITIES */
+        @media (max-width: 640px) {
+            .section-title {
+                font-size: 28px !important;
+                line-height: 1.2 !important;
+            }
+
+            .section-subtitle {
+                font-size: 14px !important;
+            }
+        }
+
+        /* STARTING FROM BADGE */
+        .starting-from {
+            font-size: 13px;
+            color: #64748b;
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        /* ===== FOOTER CENTER ALIGNMENT FOR MOBILE ===== */
+        @media (max-width: 768px) {
+            footer h4 {
+                text-align: center;
+            }
+
+            footer ul {
+                text-align: center;
+            }
+
+            footer ul li {
+                justify-content: center;
+                text-align: center;
+            }
+
+            footer ul li a {
+                display: inline-block;
+            }
+
+            /* Center contact info items */
+            footer .flex.items-center.gap-2 {
+                justify-content: center;
+            }
+
+            /* Center social media icons */
+            footer .flex.gap-3 {
+                justify-content: center;
+            }
+
+            /* Center footer logo and description */
+            footer img {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            footer>div>div>div>p {
+                text-align: center;
+            }
+        }
+
+        /* Navbar Button Colors to match profilepushing.html */
+        nav .bg-blue-600 {
+            background-color: #1D5D7F !important;
+        }
+
+        nav .hover\:bg-blue-700:hover {
+            background-color: #144A66 !important;
+        }
+
+        nav .border-blue-600 {
+            border-color: #1D5D7F !important;
+        }
+
+        nav .text-blue-600 {
+            color: #1D5D7F !important;
+        }
+
+        nav .hover\:bg-blue-50:hover {
+            background-color: rgba(29, 93, 127, 0.05) !important;
+        }
+
+        nav .dropdown-toggle:hover {
+            color: #1D5D7F !important;
+        }
+
+        nav .dropdown.active .dropdown-toggle {
+            color: #1D5D7F !important;
+        }
+
+        nav .dropdown-menu a:hover {
+            background: #1D5D7F !important;
+        }
+
+        nav .dropdown-menu a i {
+            color: #1D5D7F !important;
+        }
+
+        nav .mobile-dropdown-toggle.active {
+            color: #1D5D7F !important;
+        }
+
+        nav .mobile-dropdown-toggle.active i.arrow {
+            color: #1D5D7F !important;
+        }
+
+        nav .mobile-dropdown-content a:active {
+            background: #1D5D7F !important;
+            border-color: #1D5D7F !important;
+        }
+
+        /* ===== WHATSAPP FLOATING BUTTON ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 10px;
+            background: #25D366;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 3px 15px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .whatsapp-float.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-float:active {
+            transform: scale(0.95);
+        }
+
+        @media (min-width: 768px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 26px;
+                bottom: 25px;
+                right: 15px;
+            }
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'blujay': {
+                            50: '#E8F4F8',
+                            100: '#B8D8E8',
+                            500: '#236192',
+                            600: '#1D5D7F',
+                            700: '#144A66',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/responsive-global.css">
+</head>
+
+<body class="bg-white">
+
+    <!-- Navbar - Improved Design with Scroll Effect -->
+    <nav class="fixed w-full top-0 z-50 nav-glass" id="navbar">
+        <div class="px-4 lg:px-8">
+            <div class="flex justify-between items-center h-[60px] lg:h-[72px]">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center">
+                    <img fetchpriority="high" height="400" width="600" src="logo.png" alt="Blujay Technologies" class="h-9 lg:h-12 w-auto" id="site-logo">
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center gap-8 ml-auto">
+                    <!-- Home Link -->
+                    <a href="index.html"
+                        class="text-[13px] lg:text-[14px] font-medium text-gray-700 hover:text-blue-600 transition-colors">
+                        Home
+                    </a>
+
+                    <!-- Courses Dropdown -->
+                    <div class="dropdown">
+                        <button
+                            class="dropdown-toggle text-[13px] lg:text-[14px] font-medium text-gray-700 hover:text-blue-600 transition-colors">
+                            Courses <i class="fas fa-chevron-down chevron"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="recorded-courses.html"><i class="fas fa-video"></i>Self-Paced / Recorded
+                                Courses</a>
+                            <a href="all-courses.html"><i class="fas fa-graduation-cap"></i>All Courses</a>
+                        </div>
+                    </div>
+
+                    <!-- Career Support Dropdown -->
+                    <div class="dropdown">
+                        <button
+                            class="dropdown-toggle text-[13px] lg:text-[14px] font-medium text-gray-700 hover:text-blue-600 transition-colors">
+                            Career Support <i class="fas fa-chevron-down chevron"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="profilepushing.html"><i class="fas fa-user-tie"></i>Profile Pushing</a>
+                            <a href="jobsupport.html"><i class="fas fa-headset"></i>Job Support</a>
+                        </div>
+                    </div>
+
+                    <!-- Service Dropdown -->
+                    <div class="dropdown">
+                        <button
+                            class="dropdown-toggle text-[13px] lg:text-[14px] font-medium text-gray-700 hover:text-blue-600 transition-colors">
+                            Service <i class="fas fa-chevron-down chevron"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="digital-marketing-seo.html"><i class="fas fa-bullhorn"></i>Digital Marketing
+                                Services</a>
+                            <a href="services.html"><i class="fas fa-code"></i>Web Development Services</a>
+                        </div>
+                    </div>
+
+                    <!-- About Dropdown -->
+                    <div class="dropdown">
+                        <button
+                            class="dropdown-toggle text-[13px] lg:text-[14px] font-medium text-gray-700 hover:text-blue-600 transition-colors">
+                            About <i class="fas fa-chevron-down chevron"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="about.html"><i class="fas fa-info-circle"></i>About Blujay</a>
+                            <a href="#"><i class="fas fa-handshake"></i>Community & Partnerships</a>
+                            <a href="#"><i class="fas fa-heart"></i>Social Impact</a>
+                            <a href="/success-stories.html"><i class="fas fa-trophy"></i>Success Stories</a>
+                        </div>
+                    </div>
+
+                    <!-- Resource Dropdown -->
+                    <div class="dropdown">
+                        <button
+                            class="dropdown-toggle text-[13px] lg:text-[14px] font-medium text-gray-700 hover:text-blue-600 transition-colors">
+                            Resource <i class="fas fa-chevron-down chevron"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="jobroadmap.html"><i class="fas fa-map-marked-alt"></i>Roadmap</a>
+                            <a href="blogs.html"><i class="fas fa-blog"></i>Blog</a>
+                        </div>
+                    </div>
+
+                    <a href="login.html"
+                        class="border-2 border-blue-600 text-blue-600 px-4 py-1.5 rounded-lg text-[12px] lg:text-[13px] font-semibold hover:bg-blue-50 transition-all">Login</a>
+                    <a href="contactus.html"
+                        class="bg-blue-600 text-white px-4 py-2 rounded-lg text-[12px] lg:text-[13px] font-semibold hover:bg-blue-700 transition-all flex items-center gap-2">
+                        <i class="fas fa-phone-alt text-[10px]"></i> Contact Us
+                    </a>
+                </div>
+
+                <!-- Mobile: Hamburger -->
+                <div class="flex lg:hidden items-center">
+                    <button id="mobile-toggle"
+                        class="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-all">
+                        <i class="fas fa-bars text-[20px] text-gray-900"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="fixed inset-0 z-[100] transform translate-x-full transition-transform duration-300 lg:hidden"
+            style="background-color: #ffffff !important;">
+            <div class="flex justify-between items-center h-[60px] px-4 border-b"
+                style="background-color: #ffffff !important;">
+                <div class="h-9 w-28 bg-contain bg-no-repeat bg-left md:hidden" style="background-image:url('logo.png');" aria-label="Blujay Technologies"></div>
+                <button id="mobile-close"
+                    class="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-all">
+                    <i class="fas fa-times text-[22px] text-gray-800"></i>
+                </button>
+            </div>
+
+            <div class="overflow-y-auto h-[calc(100vh-60px)]" style="background-color: #ffffff !important;">
+                <div class="px-4 py-4">
+                    <!-- Home Link -->
+                    <a href="index.html"
+                        class="block text-[14px] font-semibold text-gray-900 py-2.5 px-0 border-b border-gray-200 hover:text-blue-600 transition-colors">
+                        Home
+                    </a>
+
+                    <div class="mobile-dropdown-wrapper">
+                        <button class="mobile-dropdown-toggle text-[14px] font-semibold text-gray-900" type="button">
+                            Courses <i class="fas fa-chevron-down arrow"></i>
+                        </button>
+                        <div class="mobile-dropdown-content">
+                            <div class="mobile-dropdown-inner">
+                                <a href="recorded-courses.html"><i class="fas fa-video"></i>Self-Paced / Recorded
+                                    Courses</a>
+                                <a href="all-courses.html"><i class="fas fa-graduation-cap"></i>All Courses</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mobile-dropdown-wrapper">
+                        <button class="mobile-dropdown-toggle text-[14px] font-semibold text-gray-900" type="button">
+                            Career Support <i class="fas fa-chevron-down arrow"></i>
+                        </button>
+                        <div class="mobile-dropdown-content">
+                            <div class="mobile-dropdown-inner">
+                                <a href="profilepushing.html"><i class="fas fa-user-tie"></i>Profile Pushing</a>
+                                <a href="jobsupport.html"><i class="fas fa-headset"></i>Job Support</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mobile-dropdown-wrapper">
+                        <button class="mobile-dropdown-toggle text-[14px] font-semibold text-gray-900" type="button">
+                            Services <i class="fas fa-chevron-down arrow"></i>
+                        </button>
+                        <div class="mobile-dropdown-content">
+                            <div class="mobile-dropdown-inner">
+                                <a href="digital-marketing-seo.html"><i class="fas fa-bullhorn"></i>Digital Marketing
+                                    Services</a>
+                                <a href="services.html"><i class="fas fa-code"></i>Web Development Services</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mobile-dropdown-wrapper">
+                        <button class="mobile-dropdown-toggle text-[14px] font-semibold text-gray-900" type="button">
+                            About <i class="fas fa-chevron-down arrow"></i>
+                        </button>
+                        <div class="mobile-dropdown-content">
+                            <div class="mobile-dropdown-inner">
+                                <a href="about.html"><i class="fas fa-info-circle"></i>About Blujay</a>
+                                <a href="#"><i class="fas fa-handshake"></i>Community & Partnerships</a>
+                                <a href="#"><i class="fas fa-heart"></i>Social Impact</a>
+                                <a href="/success-stories.html"><i class="fas fa-trophy"></i>Success Stories</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mobile-dropdown-wrapper">
+                        <button class="mobile-dropdown-toggle text-[14px] font-semibold text-gray-900" type="button">
+                            Resources <i class="fas fa-chevron-down arrow"></i>
+                        </button>
+                        <div class="mobile-dropdown-content">
+                            <div class="mobile-dropdown-inner">
+                                <a href="jobroadmap.html"><i class="fas fa-map-marked-alt"></i>Roadmap</a>
+                                <a href="blogs.html"><i class="fas fa-blog"></i>Blog</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="contactus.html"
+                        class="block w-full text-center bg-blue-600 text-white py-2.5 rounded-lg text-[13px] font-semibold mt-6 hover:bg-blue-700 transition-all shadow-md">
+                        Contact Us
+                    </a>
+
+                    <a href="login.html"
+                        class="block w-full text-center border-2 border-blue-600 text-blue-600 py-2.5 rounded-lg text-[13px] font-semibold mt-3 hover:bg-blue-50 transition-all">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Main Content -->
+    <main class="pt-[60px] lg:pt-[72px]">
+
+        <!-- Hero Section -->
+        <section class="py-12 lg:py-16" style="background: linear-gradient(135deg, #1D5D7F 0%, #236192 100%);">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
+                <div class="text-center max-w-4xl mx-auto">
+                    <div
+                        class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-5">
+                        <i class="fas fa-sparkles text-white text-[12px]"></i>
+                        <span
+                            class="text-white text-[11px] lg:text-[13px] font-semibold tracking-wider uppercase">Professional
+                            Services</span>
+                    </div>
+
+                    <h1 class="section-title text-[32px] lg:text-[48px] font-bold text-white mb-5 leading-tight">
+                        Transform Your Digital <br class="hidden lg:block">Presence with Blujay
+                    </h1>
+
+                    <p
+                        class="section-subtitle text-[15px] lg:text-[18px] text-white/90 mb-7 max-w-2xl mx-auto leading-relaxed">
+                        Comprehensive digital marketing and web development solutions designed to help your business
+                        grow and succeed in the digital age.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="#services"
+                            class="bg-white text-blue-600 px-8 py-3.5 rounded-xl text-[14px] lg:text-[15px] font-semibold hover:bg-gray-50 transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-2">
+                            Explore Services <i class="fas fa-arrow-down text-[12px]"></i>
+                        </a>
+                        <a href="#pricing"
+                            class="bg-transparent border-2 border-white text-white px-8 py-3.5 rounded-xl text-[14px] lg:text-[15px] font-semibold hover:bg-white/10 backdrop-blur-sm transition-all inline-flex items-center gap-2">
+                            View Pricing <i class="fas fa-tag text-[12px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Digital Marketing Services -->
+        <section id="services" class="py-16 lg:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center mb-12 lg:mb-16">
+                    <div class="inline-flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-full mb-4">
+                        <i class="fas fa-bullhorn text-blue-600 text-[12px]"></i>
+                        <span
+                            class="text-blue-600 text-[11px] lg:text-[12px] font-bold tracking-wider uppercase">Digital
+                            Marketing</span>
+                    </div>
+                    <h2 class="text-[28px] lg:text-[42px] font-bold text-gray-900 mb-4">Strategic Marketing Solutions
+                    </h2>
+                    <p class="text-[14px] lg:text-[17px] text-gray-600 max-w-2xl mx-auto">
+                        Data-driven strategies to enhance visibility, engage audiences, and achieve measurable results.
+                    </p>
+                </div>
+
+                <!-- Services Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+                    <!-- Service Card 1 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-2xl p-6 lg:p-8 hover:border-blue-600">
+                        <div
+                            class="service-card-icon w-14 h-14 lg:w-16 lg:h-16 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
+                            <i class="fas fa-search text-blue-600 text-[20px] lg:text-[24px]"></i>
+                        </div>
+                        <h3 class="text-[18px] lg:text-[22px] font-bold text-gray-900 mb-3">SEO Optimization</h3>
+                        <p class="text-[13px] lg:text-[15px] text-gray-600 mb-5 leading-relaxed">
+                            Improve organic visibility through technical excellence and strategic content optimization.
+                        </p>
+                        <ul class="space-y-2.5 mb-6">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Technical SEO & Site
+                                    Architecture</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Keyword Strategy &
+                                    Implementation</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Performance Monitoring</span>
+                            </li>
+                        </ul>
+                        <a href="#"
+                            class="text-blue-600 font-semibold text-[13px] lg:text-[14px] inline-flex items-center gap-2 hover:gap-3 transition-all">
+                            Learn More <i class="fas fa-arrow-right text-[11px]"></i>
+                        </a>
+                    </div>
+
+                    <!-- Service Card 2 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-2xl p-6 lg:p-8 hover:border-blue-600">
+                        <div
+                            class="service-card-icon w-14 h-14 lg:w-16 lg:h-16 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
+                            <i class="fas fa-share-alt text-blue-600 text-[20px] lg:text-[24px]"></i>
+                        </div>
+                        <h3 class="text-[18px] lg:text-[22px] font-bold text-gray-900 mb-3">Social Media Marketing</h3>
+                        <p class="text-[13px] lg:text-[15px] text-gray-600 mb-5 leading-relaxed">
+                            Build engaged communities and amplify brand presence across all major platforms.
+                        </p>
+                        <ul class="space-y-2.5 mb-6">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Content Strategy &
+                                    Creation</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Platform Management &
+                                    Growth</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Social Analytics</span>
+                            </li>
+                        </ul>
+                        <a href="#"
+                            class="text-blue-600 font-semibold text-[13px] lg:text-[14px] inline-flex items-center gap-2 hover:gap-3 transition-all">
+                            Learn More <i class="fas fa-arrow-right text-[11px]"></i>
+                        </a>
+                    </div>
+
+                    <!-- Service Card 3 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-2xl p-6 lg:p-8 hover:border-blue-600">
+                        <div
+                            class="service-card-icon w-14 h-14 lg:w-16 lg:h-16 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
+                            <i class="fas fa-bullhorn text-blue-600 text-[20px] lg:text-[24px]"></i>
+                        </div>
+                        <h3 class="text-[18px] lg:text-[22px] font-bold text-gray-900 mb-3">Paid Advertising</h3>
+                        <p class="text-[13px] lg:text-[15px] text-gray-600 mb-5 leading-relaxed">
+                            Drive qualified traffic with precision-targeted paid campaigns across channels.
+                        </p>
+                        <ul class="space-y-2.5 mb-6">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Google Ads Management</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Social Media Advertising</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">ROI Tracking & Reporting</span>
+                            </li>
+                        </ul>
+                        <a href="#"
+                            class="text-blue-600 font-semibold text-[13px] lg:text-[14px] inline-flex items-center gap-2 hover:gap-3 transition-all">
+                            Learn More <i class="fas fa-arrow-right text-[11px]"></i>
+                        </a>
+                    </div>
+
+                    <!-- Service Card 4 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-2xl p-6 lg:p-8 hover:border-blue-600">
+                        <div
+                            class="service-card-icon w-14 h-14 lg:w-16 lg:h-16 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
+                            <i class="fas fa-pen-nib text-blue-600 text-[20px] lg:text-[24px]"></i>
+                        </div>
+                        <h3 class="text-[18px] lg:text-[22px] font-bold text-gray-900 mb-3">Content Marketing</h3>
+                        <p class="text-[13px] lg:text-[15px] text-gray-600 mb-5 leading-relaxed">
+                            Create compelling narratives that engage audiences and establish thought leadership.
+                        </p>
+                        <ul class="space-y-2.5 mb-6">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Content Strategy
+                                    Development</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Visual Content & Design</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Distribution &
+                                    Amplification</span>
+                            </li>
+                        </ul>
+                        <a href="#"
+                            class="text-blue-600 font-semibold text-[13px] lg:text-[14px] inline-flex items-center gap-2 hover:gap-3 transition-all">
+                            Learn More <i class="fas fa-arrow-right text-[11px]"></i>
+                        </a>
+                    </div>
+
+                    <!-- Service Card 5 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-2xl p-6 lg:p-8 hover:border-blue-600">
+                        <div
+                            class="service-card-icon w-14 h-14 lg:w-16 lg:h-16 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
+                            <i class="fas fa-envelope-open-text text-blue-600 text-[20px] lg:text-[24px]"></i>
+                        </div>
+                        <h3 class="text-[18px] lg:text-[22px] font-bold text-gray-900 mb-3">Email Marketing</h3>
+                        <p class="text-[13px] lg:text-[15px] text-gray-600 mb-5 leading-relaxed">
+                            Nurture relationships with intelligent email automation and campaigns.
+                        </p>
+                        <ul class="space-y-2.5 mb-6">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Campaign Design &
+                                    Copywriting</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Automation Workflow Setup</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Performance Analytics</span>
+                            </li>
+                        </ul>
+                        <a href="#"
+                            class="text-blue-600 font-semibold text-[13px] lg:text-[14px] inline-flex items-center gap-2 hover:gap-3 transition-all">
+                            Learn More <i class="fas fa-arrow-right text-[11px]"></i>
+                        </a>
+                    </div>
+
+                    <!-- Service Card 6 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-2xl p-6 lg:p-8 hover:border-blue-600">
+                        <div
+                            class="service-card-icon w-14 h-14 lg:w-16 lg:h-16 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
+                            <i class="fas fa-chart-line text-blue-600 text-[20px] lg:text-[24px]"></i>
+                        </div>
+                        <h3 class="text-[18px] lg:text-[22px] font-bold text-gray-900 mb-3">Analytics & Insights</h3>
+                        <p class="text-[13px] lg:text-[15px] text-gray-600 mb-5 leading-relaxed">
+                            Transform data into actionable insights with comprehensive analytics frameworks.
+                        </p>
+                        <ul class="space-y-2.5 mb-6">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Analytics Platform Setup</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Custom Dashboard
+                                    Development</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fas fa-check text-blue-600 text-[12px] mt-1"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Strategic Recommendations</span>
+                            </li>
+                        </ul>
+                        <a href="#"
+                            class="text-blue-600 font-semibold text-[13px] lg:text-[14px] inline-flex items-center gap-2 hover:gap-3 transition-all">
+                            Learn More <i class="fas fa-arrow-right text-[11px]"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Website Development Pricing -->
+        <section id="pricing" class="py-16 lg:py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center mb-12 lg:mb-16">
+                    <div class="inline-flex items-center gap-2 bg-blue-600 px-4 py-2 rounded-full mb-4">
+                        <i class="fas fa-code text-white text-[12px]"></i>
+                        <span class="text-white text-[11px] lg:text-[12px] font-bold tracking-wider uppercase">Website
+                            Development</span>
+                    </div>
+                    <h2 class="text-[28px] lg:text-[42px] font-bold text-gray-900 mb-4">Professional Websites Built for
+                        Success</h2>
+                    <p class="text-[14px] lg:text-[17px] text-gray-600 max-w-2xl mx-auto">
+                        Comprehensive development packages with hosting, domain, and ongoing support included.
+                    </p>
+                </div>
+
+                <!-- Pricing Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+                    <!-- Basic Plan -->
+                    <div class="pricing-card bg-white rounded-2xl p-6 lg:p-8 border border-gray-200">
+                        <div class="mb-6">
+                            <div class="inline-flex items-center gap-2 bg-gray-100 px-3 py-1.5 rounded-full mb-4">
+                                <span
+                                    class="text-gray-700 text-[11px] lg:text-[12px] font-bold uppercase tracking-wider">Standard</span>
+                            </div>
+                            <div
+                                class="w-12 h-12 lg:w-14 lg:h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-laptop-code text-blue-600 text-[20px] lg:text-[24px]"></i>
+                            </div>
+                            <h3 class="text-[20px] lg:text-[24px] font-bold text-gray-900 mb-3">Basic Website</h3>
+
+                            <span class="starting-from">Starting From</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-[36px] lg:text-[44px] font-bold text-blue-600">&#8377;18,999</span>
+                            </div>
+                            <p class="text-[12px] lg:text-[13px] text-gray-500 mt-1">+ 18% GST</p>
+                        </div>
+
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">5 Pages Website</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">1 Year Free Domain &
+                                    Hosting</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Premium Dynamic Design</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Admin Access Panel</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">24/7 Support</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">SSL Certificate & 5 Emails</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">100% Responsive Design</span>
+                            </li>
+                        </ul>
+
+                        <button
+                            class="w-full bg-blue-600 text-white py-3.5 rounded-xl text-[14px] lg:text-[15px] font-semibold hover:bg-blue-700 transition-all shadow-md hover:shadow-lg">
+                            Get Started
+                        </button>
+                    </div>
+
+                    <!-- Premium Plan (Featured) -->
+                    <div class="pricing-card pricing-featured bg-white rounded-2xl p-6 lg:p-8 relative">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                            <span
+                                class="bg-blue-600 text-white px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider shadow-lg">
+                                Most Popular
+                            </span>
+                        </div>
+
+                        <div class="mb-6 mt-2">
+                            <div class="inline-flex items-center gap-2 bg-blue-100 px-3 py-1.5 rounded-full mb-4">
+                                <span
+                                    class="text-blue-700 text-[11px] lg:text-[12px] font-bold uppercase tracking-wider">Premium</span>
+                            </div>
+                            <div
+                                class="w-12 h-12 lg:w-14 lg:h-14 bg-blue-600 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-star text-white text-[20px] lg:text-[24px]"></i>
+                            </div>
+                            <h3 class="text-[20px] lg:text-[24px] font-bold text-gray-900 mb-3">Premium Website</h3>
+
+                            <span class="starting-from">Starting From</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-[36px] lg:text-[44px] font-bold text-blue-600">&#8377;39,999</span>
+                            </div>
+                            <p class="text-[12px] lg:text-[13px] text-gray-500 mt-1">+ 18% GST</p>
+                        </div>
+
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">12 Pages Website</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">1 Year Free Domain &
+                                    Hosting</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Premium Dynamic Design</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Admin Access Panel</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Google Search Console</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">24/7 Priority Support</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">SSL & 10 Email Accounts</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Advanced SEO Optimization</span>
+                            </li>
+                        </ul>
+
+                        <button
+                            class="w-full bg-blue-600 text-white py-3.5 rounded-xl text-[14px] lg:text-[15px] font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl">
+                            Get Started Now
+                        </button>
+                    </div>
+
+                    <!-- Custom Plan -->
+                    <div class="pricing-card bg-white rounded-2xl p-6 lg:p-8 border border-gray-200">
+                        <div class="mb-6">
+                            <div class="inline-flex items-center gap-2 bg-gray-100 px-3 py-1.5 rounded-full mb-4">
+                                <span
+                                    class="text-gray-700 text-[11px] lg:text-[12px] font-bold uppercase tracking-wider">Custom</span>
+                            </div>
+                            <div
+                                class="w-12 h-12 lg:w-14 lg:h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-cog text-blue-600 text-[20px] lg:text-[24px]"></i>
+                            </div>
+                            <h3 class="text-[20px] lg:text-[24px] font-bold text-gray-900 mb-3">Custom Solution</h3>
+
+                            <span class="starting-from">Based on Requirements</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-[36px] lg:text-[44px] font-bold text-blue-600">Custom</span>
+                            </div>
+                            <p class="text-[12px] lg:text-[13px] text-gray-500 mt-1">+ 18% GST Applicable</p>
+                        </div>
+
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Unlimited Pages</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Custom Features &
+                                    Integrations</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Advanced Development</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Dedicated Project Manager</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Custom API Development</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Enterprise Support</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Tailored Solutions</span>
+                            </li>
+                        </ul>
+
+                        <button
+                            class="w-full bg-gray-900 text-white py-3.5 rounded-xl text-[14px] lg:text-[15px] font-semibold hover:bg-gray-800 transition-all shadow-md hover:shadow-lg">
+                            Contact Us
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- E-Commerce Solutions -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center mb-12 lg:mb-16">
+                    <div class="inline-flex items-center gap-2 bg-green-50 px-4 py-2 rounded-full mb-4">
+                        <i class="fas fa-shopping-cart text-green-600 text-[12px]"></i>
+                        <span
+                            class="text-green-600 text-[11px] lg:text-[12px] font-bold tracking-wider uppercase">E-Commerce</span>
+                    </div>
+                    <h2 class="text-[28px] lg:text-[42px] font-bold text-gray-900 mb-4">Power Your Online Store</h2>
+                    <p class="text-[14px] lg:text-[17px] text-gray-600 max-w-2xl mx-auto">
+                        Complete e-commerce solutions with payment gateway, inventory management, and more.
+                    </p>
+                </div>
+
+                <!-- E-Commerce Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+                    <!-- Premium Store -->
+                    <div class="pricing-card bg-white rounded-2xl p-6 lg:p-8 border border-gray-200">
+                        <div class="mb-6">
+                            <div class="inline-flex items-center gap-2 bg-green-100 px-3 py-1.5 rounded-full mb-4">
+                                <span
+                                    class="text-green-700 text-[11px] lg:text-[12px] font-bold uppercase tracking-wider">E-Commerce</span>
+                            </div>
+                            <div
+                                class="w-12 h-12 lg:w-14 lg:h-14 bg-green-50 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-store text-green-600 text-[20px] lg:text-[24px]"></i>
+                            </div>
+                            <h3 class="text-[20px] lg:text-[24px] font-bold text-gray-900 mb-3">Premium Store</h3>
+
+                            <span class="starting-from">Starting From</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-[36px] lg:text-[44px] font-bold text-green-600">&#8377;42,999</span>
+                            </div>
+                            <p class="text-[12px] lg:text-[13px] text-gray-500 mt-1">+ 18% GST</p>
+                        </div>
+
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Up to 100 Products</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Payment Gateway
+                                    Integration</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Inventory Management</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Order Management System</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">1 Year Domain & Hosting</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">SSL & Security</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Responsive Design</span>
+                            </li>
+                        </ul>
+
+                        <button
+                            class="w-full bg-green-600 text-white py-3.5 rounded-xl text-[14px] lg:text-[15px] font-semibold hover:bg-green-700 transition-all shadow-md hover:shadow-lg">
+                            Get Started
+                        </button>
+                    </div>
+
+                    <!-- Marketplace Platform -->
+                    <div class="pricing-card bg-white rounded-2xl p-6 lg:p-8 border-2 border-green-600 relative">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                            <span
+                                class="bg-green-600 text-white px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider shadow-lg">
+                                Best Value
+                            </span>
+                        </div>
+
+                        <div class="mb-6 mt-2">
+                            <div class="inline-flex items-center gap-2 bg-green-100 px-3 py-1.5 rounded-full mb-4">
+                                <span
+                                    class="text-green-700 text-[11px] lg:text-[12px] font-bold uppercase tracking-wider">Marketplace</span>
+                            </div>
+                            <div
+                                class="w-12 h-12 lg:w-14 lg:h-14 bg-green-600 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-shopping-bag text-white text-[20px] lg:text-[24px]"></i>
+                            </div>
+                            <h3 class="text-[20px] lg:text-[24px] font-bold text-gray-900 mb-3">Marketplace Platform
+                            </h3>
+
+                            <span class="starting-from">Starting From</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-[36px] lg:text-[44px] font-bold text-green-600">&#8377;81,999</span>
+                            </div>
+                            <p class="text-[12px] lg:text-[13px] text-gray-500 mt-1">+ 18% GST</p>
+                        </div>
+
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Unlimited Products</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Multi-Vendor Support</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Advanced Inventory System</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Commission Management</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Payment Gateway + Wallet</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Analytics Dashboard</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Premium Support</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-600 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Advanced SEO & Marketing</span>
+                            </li>
+                        </ul>
+
+                        <button
+                            class="w-full bg-green-600 text-white py-3.5 rounded-xl text-[14px] lg:text-[15px] font-semibold hover:bg-green-700 transition-all shadow-lg hover:shadow-xl">
+                            Start Building
+                        </button>
+                    </div>
+
+                    <!-- Custom Marketplace -->
+                    <div class="pricing-card bg-white rounded-2xl p-6 lg:p-8 border border-gray-200">
+                        <div class="mb-6">
+                            <div class="inline-flex items-center gap-2 bg-gray-100 px-3 py-1.5 rounded-full mb-4">
+                                <span
+                                    class="text-gray-700 text-[11px] lg:text-[12px] font-bold uppercase tracking-wider">Enterprise</span>
+                            </div>
+                            <div
+                                class="w-12 h-12 lg:w-14 lg:h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-rocket text-gray-700 text-[20px] lg:text-[24px]"></i>
+                            </div>
+                            <h3 class="text-[20px] lg:text-[24px] font-bold text-gray-900 mb-3">Custom Marketplace</h3>
+
+                            <span class="starting-from">Based on Requirements</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-[36px] lg:text-[44px] font-bold text-gray-900">Custom</span>
+                            </div>
+                            <p class="text-[12px] lg:text-[13px] text-gray-500 mt-1">+ 18% GST Applicable</p>
+                        </div>
+
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-gray-700 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Fully Custom Development</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-gray-700 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Advanced Features</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-gray-700 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">API Integrations</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-gray-700 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Mobile Apps (iOS +
+                                    Android)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-gray-700 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Dedicated Team</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-gray-700 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">24/7 Enterprise Support</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-gray-700 text-[16px] mt-0.5"></i>
+                                <span class="text-[13px] lg:text-[14px] text-gray-700">Scalable Infrastructure</span>
+                            </li>
+                        </ul>
+
+                        <button
+                            class="w-full bg-gray-900 text-white py-3.5 rounded-xl text-[14px] lg:text-[15px] font-semibold hover:bg-gray-800 transition-all shadow-md hover:shadow-lg">
+                            Contact Sales
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#0d1b2a] text-white py-12 lg:py-16">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
+
+                <!-- Company Info -->
+                <div class="lg:col-span-1 text-center lg:text-left">
+                    <div class="flex items-center justify-center lg:justify-start gap-3 mb-4">
+                        <img loading="lazy" height="400" width="600" src="logo.png" alt="Blujay Technologies" class="h-10 w-auto" id="site-logo">
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-4">
+                        Empowering careers and businesses through quality IT education and professional digital
+                        services.
+                    </p>
+                    <div class="space-y-2 text-sm text-gray-400">
+                        <div class="flex items-start gap-2 justify-center lg:justify-start">
+                            <i class="fas fa-map-marker-alt mt-1 flex-shrink-0"></i>
+                            <span>Ameerpet, Hyderabad, India</span>
+                        </div>
+                        <div class="flex items-center gap-2 justify-center lg:justify-start">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 96187 21797</span>
+                        </div>
+                        <div class="flex items-center gap-2 justify-center lg:justify-start">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@blujaytech.com</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Courses -->
+                <div class="text-center lg:text-left">
+                    <h4 class="text-base font-semibold mb-4">Courses</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="all-courses.html" class="hover:text-white transition-colors">Full Stack
+                                Development</a></li>
+                        <li><a href="all-courses.html" class="hover:text-white transition-colors">Data Science</a></li>
+                        <li><a href="all-courses.html" class="hover:text-white transition-colors">Cloud Computing</a>
+                        </li>
+                        <li><a href="all-courses.html" class="hover:text-white transition-colors">Digital Marketing</a>
+                        </li>
+                        <li><a href="all-courses.html" class="hover:text-white transition-colors">All Courses</a></li>
+                    </ul>
+                </div>
+
+                <!-- Career Support -->
+                <div class="text-center lg:text-left">
+                    <h4 class="text-base font-semibold mb-4">Career Support</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="profilepushing.html" class="hover:text-white transition-colors">Profile Pushing</a>
+                        </li>
+                        <li><a href="jobsupport.html" class="hover:text-white transition-colors">Job Support</a></li>
+                        <li><a href="jobroadmap.html" class="hover:text-white transition-colors">Interview
+                                Preparation</a></li>
+                        <li><a href="/placement.html" class="hover:text-white transition-colors">Placement Assistance</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="text-center lg:text-left">
+                    <h4 class="text-base font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="services.html" class="hover:text-white transition-colors">Digital Marketing</a>
+                        </li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Web Development</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">SEO Services</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Custom Solutions</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div class="text-center lg:text-left">
+                    <h4 class="text-base font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="/careers.html" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="blogs.html" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div class="text-center lg:text-left">
+                    <h4 class="text-base font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="/success-stories.html" class="hover:text-white transition-colors">Success Stories</a></li>
+                        <li><a href="/community/index.html" class="hover:text-white transition-colors">Community</a></li>
+                        <li><a href="/faqs.html" class="hover:text-white transition-colors">FAQs</a></li>
+                        <li><a href="/terms.html" class="hover:text-white transition-colors">Terms & Privacy</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="border-t border-gray-800 pt-6">
+                <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
+                    <p class="text-xs text-gray-500 text-center lg:text-left">
+                        2026 Blujay Technologies. All rights reserved.
+                    </p>
+
+                    <!-- Social Media Links -->
+                    <div class="flex gap-3">
+                        <a href="https://facebook.com/blujaytechnologies" target="_blank" rel="noopener noreferrer"
+                            class="w-8 h-8 flex items-center justify-center hover:text-blue-500 transition-colors">
+                            <i class="fab fa-facebook text-base"></i>
+                        </a>
+                        <a href="https://twitter.com/blujaytech" target="_blank" rel="noopener noreferrer"
+                            class="w-8 h-8 flex items-center justify-center hover:text-blue-400 transition-colors">
+                            <i class="fab fa-twitter text-base"></i>
+                        </a>
+                        <a href="https://linkedin.com/company/blujay-technologies" target="_blank"
+                            rel="noopener noreferrer"
+                            class="w-8 h-8 flex items-center justify-center hover:text-blue-600 transition-colors">
+                            <i class="fab fa-linkedin text-base"></i>
+                        </a>
+                        <a href="https://instagram.com/blujaytech" target="_blank" rel="noopener noreferrer"
+                            class="w-8 h-8 flex items-center justify-center hover:text-pink-500 transition-colors">
+                            <i class="fab fa-instagram text-base"></i>
+                        </a>
+                        <a href="https://youtube.com/@blujaytech" target="_blank" rel="noopener noreferrer"
+                            class="w-8 h-8 flex items-center justify-center hover:text-red-500 transition-colors">
+                            <i class="fab fa-youtube text-base"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== CALLBACK MODAL - PROFESSIONAL COMPACT DESIGN ===== -->
+    <div id="callbackModal"
+        class="fixed inset-0 bg-black bg-opacity-60 z-[200] hidden items-center justify-center p-4 backdrop-blur-sm">
+        <div
+            class="bg-white rounded-xl max-w-3xl w-full shadow-2xl transform transition-all scale-95 modal-content overflow-visible">
+
+            <div class="flex flex-col lg:flex-row max-h-[85vh] overflow-visible">
+                <!-- Left Side - Branding Section (Desktop/Tablet) -->
+                <div
+                    class="hidden md:flex md:w-[45%] lg:w-[40%] bg-gradient-to-br from-[#0057A0] via-[#0057A0] to-[#00447C] text-white p-6 lg:p-8 flex-col justify-between relative overflow-hidden">
+                    <!-- Background Pattern -->
+                    <div class="absolute inset-0 opacity-10">
+                        <div class="absolute top-0 right-0 w-48 h-48 bg-white rounded-full -mr-24 -mt-24"></div>
+                        <div class="absolute bottom-0 left-0 w-32 h-32 bg-white rounded-full -ml-16 -mb-16"></div>
+                    </div>
+
+                    <div class="relative z-10">
+                        <div
+                            class="w-14 h-14 lg:w-16 lg:h-16 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mb-4 backdrop-blur-sm">
+                            <i class="fas fa-phone-alt text-[24px] lg:text-[28px]"></i>
+                        </div>
+                        <h2 class="text-[20px] lg:text-[24px] font-bold leading-tight mb-2">We're here to<br>support you
+                        </h2>
+                        <h3 class="text-[18px] lg:text-[22px] font-semibold mb-3">every step of<br>the way.</h3>
+                        <p class="text-blue-100 text-[13px] leading-relaxed">Let's talk!</p>
+
+                        <div class="mt-4">
+                            <p class="text-[12px] text-blue-50 leading-relaxed">
+                                Helping 1 Million People To Build Their Future in IT
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 mt-4">
+                        <div
+                            class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3 border border-white border-opacity-20">
+                            <p
+                                class="text-[10px] font-semibold text-white text-opacity-70 mb-2 uppercase tracking-wider">
+                                Contact Information</p>
+                            <div class="space-y-1.5">
+                                <div class="flex items-center gap-2 text-[12px]">
+                                    <i class="fas fa-phone text-white text-opacity-80 text-[11px]"></i>
+                                    <span>+91 96187 21797</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[12px]">
+                                    <i class="fas fa-envelope text-white text-opacity-80 text-[11px]"></i>
+                                    <span>info@blujaytech.com</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Form Section -->
+                <div class="w-full md:w-[55%] lg:w-[60%] relative bg-white max-h-[85vh] md:max-h-none overflow-visible">
+                    <!-- Mobile Header -->
+                    <div class="md:hidden bg-gradient-to-r from-[#0057A0] to-[#00447C] text-white p-5 relative">
+                        <button onclick="closeCallbackModal()"
+                            class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full hover:bg-white hover:bg-opacity-20 transition-all">
+                            <i class="fas fa-times text-[16px]"></i>
+                        </button>
+                        <div class="text-center pr-8">
+                            <div
+                                class="w-14 h-14 bg-white bg-opacity-20 rounded-xl mx-auto mb-2 flex items-center justify-center">
+                                <i class="fas fa-phone-alt text-[20px]"></i>
+                            </div>
+                            <h3 class="text-[19px] font-bold mb-1">Request a Callback</h3>
+                            <p class="text-[12px] text-white text-opacity-80">We'll get back to you within 24 hours</p>
+                        </div>
+                    </div>
+
+                    <!-- Desktop Close Button -->
+                    <button onclick="closeCallbackModal()"
+                        class="hidden md:flex absolute top-3 right-3 w-9 h-9 items-center justify-center rounded-full hover:bg-gray-100 transition-all z-20">
+                        <i class="fas fa-times text-[18px] text-gray-600"></i>
+                    </button>
+
+                    <!-- Form -->
+                    <form id="contact-form" class="p-5 lg:p-6 space-y-3.5 lg:space-y-4 overflow-visible">
+                        <div class="hidden md:block mb-4 lg:mb-5">
+                            <h3 class="text-[20px] lg:text-[24px] font-bold text-gray-900 mb-1">Get in Touch</h3>
+                            <p class="text-[13px] lg:text-[14px] text-gray-600">Fill out the form and we'll contact you
+                                soon</p>
+                        </div>
+
+                        <div>
+                            <label
+                                class="block text-[12px] lg:text-[13px] font-semibold text-gray-700 mb-1.5 lg:mb-2">Full
+                                Name *</label>
+                            <input type="text" name="name" required
+                                class="w-full px-3.5 lg:px-4 py-2 lg:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0057A0] focus:border-[#0057A0] outline-none text-[13px] lg:text-[14px] transition-all"
+                                placeholder="John Doe">
+                        </div>
+
+                        <div>
+                            <label
+                                class="block text-[12px] lg:text-[13px] font-semibold text-gray-700 mb-1.5 lg:mb-2">Email
+                                Address *</label>
+                            <input type="email" name="email" required
+                                class="w-full px-3.5 lg:px-4 py-2 lg:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0057A0] focus:border-[#0057A0] outline-none text-[13px] lg:text-[14px] transition-all"
+                                placeholder="john@example.com">
+                        </div>
+
+                        <div>
+                            <label
+                                class="block text-[12px] lg:text-[13px] font-semibold text-gray-700 mb-1.5 lg:mb-2">Phone
+                                Number *</label>
+                            <input type="tel" name="phone" required
+                                class="w-full px-3.5 lg:px-4 py-2 lg:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0057A0] focus:border-[#0057A0] outline-none text-[13px] lg:text-[14px] transition-all"
+                                placeholder="+91 XXXXX XXXXX">
+                        </div>
+
+                        <div>
+                            <label
+                                class="block text-[12px] lg:text-[13px] font-semibold text-gray-700 mb-1.5 lg:mb-2">Choose
+                                Services *</label>
+                            <div class="service-dropdown-wrapper">
+                                <div class="service-dropdown-trigger" id="serviceDropdownTrigger">
+                                    <span class="placeholder" id="serviceSelectedText">Select a service...</span>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </div>
+                                <div class="service-dropdown-menu" id="serviceDropdownMenu">
+                                    <div class="service-dropdown-item" data-value="Profile Pushing">
+                                        <i class="fas fa-code"></i>
+                                        <span>Profile Pushing</span>
+                                    </div>
+                                    <div class="service-dropdown-item" data-value="Job Support">
+                                        <i class="fas fa-mobile-alt"></i>
+                                        <span>Job Support</span>
+                                    </div>
+                                    <div class="service-dropdown-item" data-value="Web Development Services">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span>Web Development Services</span>
+                                    </div>
+                                    <div class="service-dropdown-item" data-value="Online Courses">
+                                        <i class="fas fa-cloud"></i>
+                                        <span>Online Courses</span>
+                                    </div>
+                                    <div class="service-dropdown-item" data-value="Recorded Courses">
+                                        <i class="fas fa-cloud"></i>
+                                        <span>Recorded Courses</span>
+                                    </div>
+                                </div>
+                                <select name="service" id="serviceHiddenSelect" required
+                                    style="position: absolute; opacity: 0; pointer-events: none; width: 1px; height: 1px;">
+                                    <option value="" selected></option>
+                                    <option value="Profile Pushing">Profile Pushing</option>
+                                    <option value="Job Support">Job Support</option>
+                                    <option value="Web Development Services">Web Development Services</option>
+                                    <option value="Online Courses">Online Courses</option>
+                                    <option value="Recorded Courses">Recorded Courses</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="submitBtn"
+                            class="w-full bg-[#0057A0] text-white py-2.5 lg:py-3 rounded-lg font-semibold text-[14px] lg:text-[15px] hover:bg-[#00447C] transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 mt-4 lg:mt-5">
+                            <span>Submit Now</span>
+                            <i class="fas fa-arrow-right text-[12px]"></i>
+                        </button>
+
+                        <!-- Success Message -->
+                        <div id="successMessage"
+                            class="hidden bg-green-50 border border-green-200 text-green-800 px-3 py-2.5 rounded-lg text-[12px] text-center">
+                            <i class="fas fa-check-circle mr-1"></i>
+                            <strong>Success!</strong> We'll contact you soon.
+                        </div>
+
+                        <!-- Error Message -->
+                        <div id="errorMessage"
+                            class="hidden bg-red-50 border border-red-200 text-red-800 px-3 py-2.5 rounded-lg text-[12px] text-center">
+                            <i class="fas fa-exclamation-circle mr-1"></i>
+                            <strong>Error!</strong> Please try again.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // SheetDB API Configuration - REPLACE THIS WITH YOUR ACTUAL SHEETDB URL
+        const SHEETDB_URL = 'https://sheetdb.io/api/v1/7s7xiynldn2sf';
+
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileClose = document.getElementById('mobile-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileToggle?.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileClose?.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+            document.body.style.overflow = '';
+        });
+
+        // Mobile Dropdown Toggles
+        document.querySelectorAll('.mobile-dropdown-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function () {
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                content.classList.toggle('active');
+            });
+        });
+
+        // Open Modal
+        function openCallbackModal() {
+            const modal = document.getElementById('callbackModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+
+            // Reset form
+            document.getElementById('callbackForm').reset();
+            document.getElementById('successMessage').classList.add('hidden');
+            document.getElementById('errorMessage').classList.add('hidden');
+
+            // Reset custom service dropdown
+            const serviceText = document.getElementById('serviceSelectedText');
+            const serviceSelect = document.getElementById('serviceHiddenSelect');
+            if (serviceText && serviceSelect) {
+                serviceText.textContent = 'Select a service...';
+                serviceText.classList.add('placeholder');
+                serviceText.classList.remove('selected-text');
+                serviceSelect.value = '';
+                document.querySelectorAll('.service-dropdown-item').forEach(item => {
+                    item.classList.remove('selected');
+                });
+            }
+        }
+
+        // Close Modal
+        function closeCallbackModal() {
+            const modal = document.getElementById('callbackModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+
+            // Close service dropdown if open
+            const dropdownMenu = document.getElementById('serviceDropdownMenu');
+            const dropdownTrigger = document.getElementById('serviceDropdownTrigger');
+            if (dropdownMenu && dropdownTrigger) {
+                dropdownMenu.classList.remove('active');
+                dropdownTrigger.classList.remove('active');
+            }
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('callbackModal')?.addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeCallbackModal();
+            }
+        });
+
+        // ===== CUSTOM SERVICE DROPDOWN FUNCTIONALITY =====
+        const serviceDropdownTrigger = document.getElementById('serviceDropdownTrigger');
+        const serviceDropdownMenu = document.getElementById('serviceDropdownMenu');
+        const serviceSelectedText = document.getElementById('serviceSelectedText');
+        const serviceHiddenSelect = document.getElementById('serviceHiddenSelect');
+        const serviceDropdownItems = document.querySelectorAll('.service-dropdown-item');
+
+        // Toggle dropdown
+        serviceDropdownTrigger?.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const isActive = serviceDropdownMenu.classList.contains('active');
+
+            if (isActive) {
+                serviceDropdownMenu.classList.remove('active');
+                serviceDropdownTrigger.classList.remove('active');
+            } else {
+                serviceDropdownMenu.classList.add('active');
+                serviceDropdownTrigger.classList.add('active');
+            }
+        });
+
+        // Handle item selection
+        serviceDropdownItems.forEach(item => {
+            item.addEventListener('click', function (e) {
+                e.stopPropagation();
+
+                const value = this.getAttribute('data-value');
+                const text = this.querySelector('span').textContent;
+
+                // Update selected text
+                serviceSelectedText.textContent = text;
+                serviceSelectedText.classList.remove('placeholder');
+                serviceSelectedText.classList.add('selected-text');
+
+                // Update hidden select
+                serviceHiddenSelect.value = value;
+
+                // Update selected state
+                serviceDropdownItems.forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+
+                // Close dropdown
+                serviceDropdownMenu.classList.remove('active');
+                serviceDropdownTrigger.classList.remove('active');
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (e) {
+            if (serviceDropdownMenu && serviceDropdownTrigger) {
+                if (!serviceDropdownTrigger.contains(e.target) && !serviceDropdownMenu.contains(e.target)) {
+                    serviceDropdownMenu.classList.remove('active');
+                    serviceDropdownTrigger.classList.remove('active');
+                }
+            }
+        });
+
+        // Close dropdown on escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                if (serviceDropdownMenu?.classList.contains('active')) {
+                    serviceDropdownMenu.classList.remove('active');
+                    serviceDropdownTrigger?.classList.remove('active');
+                }
+                closeCallbackModal();
+            }
+        });
+
+        // Handle Form Submission
+        document.getElementById('callbackForm')?.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const successMsg = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('errorMessage');
+
+            // Hide previous messages
+            successMsg.classList.add('hidden');
+            errorMsg.classList.add('hidden');
+
+            // Show loading state
+            submitBtn.classList.add('loading');
+            submitBtn.querySelector('span').textContent = 'Submitting...';
+
+            // Get form data
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                service: formData.get('service') || 'Not specified',
+                company: formData.get('course') || 'Not specified',
+                newsletter: formData.get('newsletter') ? 'Yes' : 'No',
+                timestamp: new Date().toLocaleString('en-IN', {
+                    timeZone: 'Asia/Kolkata',
+                    dateStyle: 'medium',
+                    timeStyle: 'short'
+                }),
+                status: 'New'
+            };
+
+            try {
+                // Send to SheetDB
+                const response = await fetch(SHEETDB_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ data: [data] })
+                });
+
+                if (response.ok) {
+                    // Success
+                    successMsg.classList.remove('hidden');
+                    this.reset();
+
+                    // Close modal after 2.5 seconds
+                    setTimeout(() => {
+                        closeCallbackModal();
+                    }, 2500);
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                // Error
+                console.error('Error:', error);
+                errorMsg.classList.remove('hidden');
+            } finally {
+                // Reset button state
+                submitBtn.classList.remove('loading');
+                submitBtn.querySelector('span').textContent = 'Submit Now';
+            }
+        });
+
+        // ===== WHATSAPP FLOATING BUTTON =====
+        const whatsappBtn = document.querySelector('.whatsapp-float');
+
+        // Show WhatsApp button immediately after page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                whatsappBtn.classList.add('show');
+            }, 500);
+        });
+
+        // Keep it visible while scrolling
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+
+            if (scrollPosition > 100) {
+                whatsappBtn.classList.add('show');
+            } else {
+                whatsappBtn.classList.add('show'); // Always show after initial load
+            }
+        });
+
+    </script>
+
+    <a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Chat on WhatsApp"
+       class="whatsapp-float"
+       style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.2);text-decoration:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+      </svg>
+    </a>
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses%20in%20Hyderabad"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat with us on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,0.25);text-decoration:none;transition:transform 0.2s ease;"
+   onmouseover="this.style.transform='scale(1.1)'"
+   onmouseout="this.style.transform='scale(1)'">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

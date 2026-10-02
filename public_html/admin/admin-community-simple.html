@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://www.blujaytech.com/admin\admin-community-simple.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Admin - Simple Version</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: linear-gradient(135deg, #f8fafc 0%, #e6f1fb 100%); min-height: 100vh; }
+        .admin-header { background: linear-gradient(135deg, #0057A0 0%, #0084D6 100%); box-shadow: 0 4px 20px rgba(0, 87, 160, 0.2); }
+        .profile-card { transition: all 0.3s ease; background: white; border-radius: 16px; border: 2px solid #e5e7eb; padding: 20px; margin-bottom: 20px; }
+        .profile-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0, 87, 160, 0.12); border-color: #0057A0; }
+        .btn-verify { background: linear-gradient(135deg, #10B981 0%, #059669 100%); color: white; padding: 8px 16px; border-radius: 8px; }
+        .btn-reject { background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); color: white; padding: 8px 16px; border-radius: 8px; }
+    </style>
+    <link rel="stylesheet" href="../css/responsive-global.css">
+</head>
+<body>
+    
+    <!-- Navigation Header -->
+    <nav class="admin-header text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <img fetchpriority="high" height="400" width="600" src="../images/logo.webp" alt="Blujay Tech" class="h-12">
+                    <div>
+                        <h1 class="text-2xl font-bold">Community Portal - Admin</h1>
+                        <p class="text-sm opacity-90">Simple Dashboard (Works with deployed backend)</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button id="refreshBtn" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg transition">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-xl p-6 shadow-lg">
+                <p class="text-gray-500 text-sm mb-1">Pending Receivers</p>
+                <p id="receiversCount" class="text-4xl font-bold text-blue-600">--</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-lg">
+                <p class="text-gray-500 text-sm mb-1">Pending Givers</p>
+                <p id="giversCount" class="text-4xl font-bold text-green-600">--</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-lg">
+                <p class="text-gray-500 text-sm mb-1">Total Pending</p>
+                <p id="totalCount" class="text-4xl font-bold text-orange-600">--</p>
+            </div>
+        </div>
+
+        <!-- Status Messages -->
+        <div id="statusMessage" class="hidden mb-6"></div>
+
+        <!-- Receivers Section -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <i class="fas fa-user-graduate text-blue-600"></i>
+                <span>Job Support Seekers (Receivers)</span>
+            </h2>
+            <div id="receiversList"></div>
+            <div id="noReceivers" class="text-center py-12 text-gray-400 hidden">
+                <i class="fas fa-check-circle text-6xl mb-3"></i>
+                <p class="text-xl">No pending receivers!</p>
+            </div>
+        </div>
+
+        <!-- Givers Section -->
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <i class="fas fa-hands-helping text-green-600"></i>
+                <span>Professional Helpers (Givers)</span>
+            </h2>
+            <div id="giversList"></div>
+            <div id="noGivers" class="text-center py-12 text-gray-400 hidden">
+                <i class="fas fa-check-circle text-6xl mb-3"></i>
+                <p class="text-xl">No pending givers!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Configuration
+        const API_URL = 'https://blujay-backend.onrender.com/api';
+        
+        // Check authentication
+        const authToken = localStorage.getItem('authToken');
+        const userRole = localStorage.getItem('userRole');
+        
+        if (!authToken || userRole !== 'admin') {
+            alert('Admin access required');
+            window.location.href = '../login.html';
+        }
+
+        // Show status message
+        function showMessage(message, type = 'info') {
+            const statusDiv = document.getElementById('statusMessage');
+            const colors = {
+                success: 'bg-green-50 border-green-500 text-green-800',
+                error: 'bg-red-50 border-red-500 text-red-800',
+                info: 'bg-blue-50 border-blue-500 text-blue-800'
+            };
+            statusDiv.className = `${colors[type]} border-l-4 p-4 rounded mb-6`;
+            statusDiv.innerHTML = `<p class="font-semibold">${message}</p>`;
+            statusDiv.classList.remove('hidden');
+            setTimeout(() => statusDiv.classList.add('hidden'), 5000);
+        }
+
+        // Load pending profiles
+        async function loadProfiles() {
+            console.log('🔄 Loading profiles...');
+            
+            try {
+                // Try the old API structure that should be deployed
+                const response = await fetch(`${API_URL}/admin/profiles/pending`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+
+                console.log('Response status:', response.status);
+
+                if (!response.ok) {
+                    throw new Error(`API returned ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                console.log('✅ Data received:', data);
+
+                const receivers = data.pendingProfiles?.receivers || [];
+                const givers = data.pendingProfiles?.givers || [];
+
+                // Update counts
+                document.getElementById('receiversCount').textContent = receivers.length;
+                document.getElementById('giversCount').textContent = givers.length;
+                document.getElementById('totalCount').textContent = receivers.length + givers.length;
+
+                // Render profiles
+                renderProfiles('receivers', receivers);
+                renderProfiles('givers', givers);
+
+                showMessage(`Loaded ${receivers.length + givers.length} pending profiles`, 'success');
+
+            } catch (error) {
+                console.error('❌ Error loading profiles:', error);
+                showMessage(`Error: ${error.message}. Check console for details.`, 'error');
+                
+                // Show helpful debug info
+                document.getElementById('receiversList').innerHTML = `
+                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded">
+                        <h3 class="font-bold text-yellow-800 mb-3">⚠️ Cannot Connect to Backend</h3>
+                        <p class="text-sm text-yellow-700 mb-3"><strong>Error:</strong> ${error.message}</p>
+                        <p class="text-sm text-yellow-700 mb-3"><strong>API URL:</strong> ${API_URL}/admin/profiles/pending</p>
+                        <div class="text-sm text-yellow-700">
+                            <strong>Possible causes:</strong>
+                            <ul class="list-disc ml-6 mt-2">
+                                <li>Backend is not deployed or is down</li>
+                                <li>Backend routes don't match this version</li>
+                                <li>Authentication token is invalid</li>
+                                <li>CORS configuration issue</li>
+                            </ul>
+                        </div>
+                        <div class="mt-4">
+                            <button onclick="checkBackend()" class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded">
+                                Test Backend Connection
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Test backend connectivity
+        async function checkBackend() {
+            console.log('🔍 Testing backend...');
+            const results = [];
+            
+            // Test 1: Basic connectivity
+            try {
+                const response = await fetch(`${API_URL}/health`);
+                results.push(`✅ Backend is reachable (Status: ${response.status})`);
+            } catch (e) {
+                results.push(`❌ Cannot reach backend: ${e.message}`);
+            }
+            
+            // Test 2: Authentication
+            try {
+                const response = await fetch(`${API_URL}/admin/profiles/pending`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                results.push(`${response.ok ? '✅' : '❌'} Admin API: ${response.status} ${response.statusText}`);
+            } catch (e) {
+                results.push(`❌ Admin API failed: ${e.message}`);
+            }
+            
+            alert('Backend Test Results:\n\n' + results.join('\n'));
+            console.log('Test results:', results);
+        }
+
+        // Render profiles
+        function renderProfiles(type, profiles) {
+            const listId = type + 'List';
+            const noDataId = 'no' + type.charAt(0).toUpperCase() + type.slice(1);
+            const listDiv = document.getElementById(listId);
+            const noDataDiv = document.getElementById(noDataId);
+
+            if (profiles.length === 0) {
+                listDiv.innerHTML = '';
+                noDataDiv.classList.remove('hidden');
+                return;
+            }
+
+            noDataDiv.classList.add('hidden');
+            listDiv.innerHTML = profiles.map(profile => `
+                <div class="profile-card">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">${profile.fullName}</h3>
+                            <p class="text-gray-600">${profile.email}</p>
+                            <p class="text-gray-600"><i class="fas fa-phone mr-2"></i>${profile.mobileNumber}</p>
+                        </div>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold">
+                            PENDING
+                        </span>
+                    </div>
+                    
+                    ${type === 'receivers' ? `
+                        <div class="grid grid-cols-2 gap-4 mb-4 text-sm">
+                            <div><strong>Location:</strong> ${profile.currentLocation || 'N/A'}</div>
+                            <div><strong>Experience:</strong> ${profile.experienceYears || 0} years</div>
+                            <div><strong>Skills:</strong> ${profile.primarySkills?.join(', ') || 'N/A'}</div>
+                        </div>
+                    ` : `
+                        <div class="grid grid-cols-2 gap-4 mb-4 text-sm">
+                            <div><strong>Company:</strong> ${profile.companyName || 'N/A'}</div>
+                            <div><strong>Industry:</strong> ${profile.industry || 'N/A'}</div>
+                            <div><strong>Website:</strong> ${profile.companyWebsite || 'N/A'}</div>
+                        </div>
+                    `}
+                    
+                    <div class="flex gap-3 mt-4">
+                        <button onclick="verifyProfile('${profile._id}', '${type === 'receivers' ? 'RECEIVER' : 'GIVER'}')" 
+                                class="btn-verify flex-1">
+                            <i class="fas fa-check-circle mr-2"></i>Verify
+                        </button>
+                        <button onclick="rejectProfile('${profile._id}', '${type === 'receivers' ? 'RECEIVER' : 'GIVER'}')" 
+                                class="btn-reject flex-1">
+                            <i class="fas fa-times-circle mr-2"></i>Reject
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Verify profile
+        async function verifyProfile(profileId, role) {
+            const notes = prompt('Add verification notes (optional):');
+            
+            try {
+                const response = await fetch(`${API_URL}/admin/profiles/${profileId}/verify`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ role, notes })
+                });
+
+                if (response.ok) {
+                    showMessage('✅ Profile verified successfully!', 'success');
+                    loadProfiles();
+                } else {
+                    const error = await response.json();
+                    showMessage(`Error: ${error.error || error.message}`, 'error');
+                }
+            } catch (error) {
+                showMessage(`Error: ${error.message}`, 'error');
+            }
+        }
+
+        // Reject profile
+        async function rejectProfile(profileId, role) {
+            const reason = prompt('Rejection reason (required):');
+            if (!reason) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/admin/profiles/${profileId}/reject`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ role, reason })
+                });
+
+                if (response.ok) {
+                    showMessage('Profile rejected', 'info');
+                    loadProfiles();
+                } else {
+                    const error = await response.json();
+                    showMessage(`Error: ${error.error || error.message}`, 'error');
+                }
+            } catch (error) {
+                showMessage(`Error: ${error.message}`, 'error');
+            }
+        }
+
+        // Event listeners
+        document.getElementById('refreshBtn').addEventListener('click', loadProfiles);
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.clear();
+            window.location.href = '../login.html';
+        });
+
+        // Load profiles on page load
+        loadProfiles();
+    </script>
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.2);text-decoration:none;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+<a href="https://wa.me/919618721797?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20IT%20courses%20in%20Hyderabad"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat with us on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,0.25);text-decoration:none;transition:transform 0.2s ease;"
+   onmouseover="this.style.transform='scale(1.1)'"
+   onmouseout="this.style.transform='scale(1)'">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.5.5 0 0 0 .609.61l5.7-1.49A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.524-5.338-1.43l-.383-.224-3.981 1.04 1.067-3.894-.234-.393A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
