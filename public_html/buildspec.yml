@@ -17,10 +17,11 @@ phases:
       - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${REPOSITORY_URI%%/*}
   build:
     commands:
-      - docker build -t ${IMAGE_URI} .
+      - if [ -f Dockerfile ]; then BUILD_CONTEXT=.; elif [ -f public_html/Dockerfile ]; then BUILD_CONTEXT=public_html; else echo "Dockerfile not found in the source root or public_html/"; exit 1; fi
+      - docker build -t ${IMAGE_URI} ${BUILD_CONTEXT}
+      - docker push ${IMAGE_URI}
   post_build:
     commands:
-      - docker push ${IMAGE_URI}
       - printf '[{"name":"%s","imageUri":"%s"}]' "${CONTAINER_NAME}" "${IMAGE_URI}" > imagedefinitions.json
 
 artifacts:
